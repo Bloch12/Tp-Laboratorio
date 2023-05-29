@@ -1,3 +1,5 @@
+package Pokemones;
+
 public abstract class Pokemon {
     private String url;
     private String nombre;

@@ -1,3 +1,6 @@
+package ClasesEstaticas;
+
+import Pokemones.PokemonDatos;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,7 +36,7 @@ public class Pokedex {
             if(pokemones.isEmpty()){
                 return "null";
             }else{
-                return pokemones.get(nombre).toString();
+                return pokemones.toString();
             }
     }
 }
