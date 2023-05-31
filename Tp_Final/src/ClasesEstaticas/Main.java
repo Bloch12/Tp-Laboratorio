@@ -3,6 +3,6 @@ package ClasesEstaticas;
 public class Main {
     public static void main(String[] args) {
         Pokedex.cargarPokemones();
-        System.out.println(Pokedex.buscarPokemon("tentacool"));
+        System.out.println(Pokedex.buscarPokemon("rapidash-galar"));
     }
 }

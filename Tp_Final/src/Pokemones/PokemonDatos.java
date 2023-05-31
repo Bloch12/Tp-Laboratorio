@@ -1,6 +1,7 @@
 package Pokemones;
 
 import ClasesEstaticas.ConsumeApi;
+import Enums.Tipo;
 import Poderes.Habilidad;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,7 +13,7 @@ public class PokemonDatos extends Pokemon{
     private int numPokedex;
     private ArrayList<Habilidad> habilidades;
     private String sprite;
-    private ArrayList<String> tipos;
+    private ArrayList<Tipo> tipos;
     private ArrayList<Integer> estadisticas;
     private Integer peso;
     private Integer felicidadBase;
@@ -49,7 +50,7 @@ public class PokemonDatos extends Pokemon{
      * @see ConsumeApi#getInfo(String)
      * @see PokemonDatos#cargarEspecie(String)
      */
-    private void cargarPokemon(){
+    public void cargarPokemon(){
         JSONObject jsonObject;
         try {
             jsonObject = new JSONObject(ConsumeApi.getInfo(getUrl()));
@@ -71,7 +72,7 @@ public class PokemonDatos extends Pokemon{
                 for (int i= 0; i<jsonArray.length();i++){
                     aux = jsonArray.getJSONObject(i);
                     aux = aux.getJSONObject("type");
-                    tipos.add(aux.getString("name"));
+                    tipos.add(Tipo.valueOf(aux.getString("name")));
                 }
                 peso = jsonObject.getInt("weight");
                 aux = jsonObject.getJSONObject("species");
@@ -134,7 +135,7 @@ public class PokemonDatos extends Pokemon{
 
     @Override
     public String toString() {
-        if(peso==0){
+        if(numPokedex==0){
             cargarPokemon();
         }
         return
