@@ -1,5 +1,7 @@
 package ClasesEstaticas;
 
+import org.json.JSONException;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -7,6 +9,12 @@ import java.util.Scanner;
 
 public class ConsumeApi {
 
+    /**
+     * Se le pasa el url de una API y devuelve los datos en formato json
+     * @param link el link donde se encuentra el json
+     * @return un String con todos los datos del json
+     * @throws RuntimeException
+     */
     public static String getInfo(String link)
     {
         try

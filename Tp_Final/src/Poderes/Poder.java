@@ -9,6 +9,11 @@ public abstract class Poder {
         this.url = url;
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
     public String getNombre() {
         return nombre;
     }

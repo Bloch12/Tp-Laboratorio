@@ -3,6 +3,7 @@ package Pokemones;
 public abstract class Pokemon {
     private String url;
     private String nombre;
+
     public Pokemon(String url, String nombre) {
         this.url = url;
         this.nombre = nombre;

@@ -8,6 +8,15 @@ public class Habilidad extends Poder{
         this.oculta = oculta;
     }
 
+    @Override
+    public String toString() {
+        String rta = super.toString() + " ";
+        if(oculta){
+            rta = rta + "Es oculta";
+        }
+        return rta;
+    }
+
     public boolean isOculta() {
         return oculta;
     }
