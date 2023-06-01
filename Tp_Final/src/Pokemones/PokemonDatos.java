@@ -1,7 +1,9 @@
 package Pokemones;
 
 import ClasesEstaticas.ConsumeApi;
+import Enums.Color;
 import Enums.Tipo;
+import Enums.TipoHuevo;
 import Poderes.Habilidad;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,8 +20,8 @@ public class PokemonDatos extends Pokemon{
     private Integer peso;
     private Integer felicidadBase;
     private Integer radioDeCaptura;
-    private String color;
-    private ArrayList<String> gruposHuevo;
+    private Color color;
+    private ArrayList<TipoHuevo> gruposHuevo;
     private String descripcion;
     private String preevolucion;
     private String evolucion;
@@ -36,7 +38,7 @@ public class PokemonDatos extends Pokemon{
         this.peso = 0;
         this.felicidadBase = 0;
         this.radioDeCaptura = 0;
-        this.color = "";
+        this.color = null;
         this.gruposHuevo = new ArrayList<>();
         this.descripcion = "";
         this.preevolucion = "";
@@ -109,12 +111,12 @@ public class PokemonDatos extends Pokemon{
                 felicidadBase = jsonObject.getInt("base_happiness");
                 radioDeCaptura = jsonObject.getInt("capture_rate");
                 aux = jsonObject.getJSONObject("color");
-                color = aux.getString("name");
+                color =Color.valueOf(aux.getString("name"));
                 jsonArray = jsonObject.getJSONArray("egg_groups");
                 for (int i = 0; i < jsonArray.length();i++)
                 {
                     aux = jsonArray.getJSONObject(i);
-                    gruposHuevo.add(aux.getString("name"));
+                    gruposHuevo.add(TipoHuevo.valueOf(aux.getString("name").replaceAll("-","")));
                 }
                 jsonArray = jsonObject.getJSONArray("pokedex_numbers");
                 aux = jsonArray.getJSONObject(0);
