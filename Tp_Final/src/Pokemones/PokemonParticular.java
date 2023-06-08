@@ -1,5 +1,6 @@
 package Pokemones;
 
+import Exepciones.HabilidadNoPermitidaExeption;
 import Poderes.Habilidad;
 import Poderes.Movimiento;
 
@@ -10,13 +11,17 @@ public class PokemonParticular extends Pokemon{
     private Integer nivel;
     private Habilidad habilidad;
     private ArrayList<Movimiento> movimientos;
+    private PokemonDatos datos;
 
-    public PokemonParticular(String url, String nombre, String nombreParticular, Integer nivel, Habilidad habilidad) {
+
+
+    public PokemonParticular(String url, String nombre, String nombreParticular, Integer nivel, Habilidad habilidad,PokemonDatos datos) {
         super(url, nombre);
         this.nombreParticular = nombreParticular;
         this.nivel = nivel;
         this.habilidad = habilidad;
         movimientos = new ArrayList<>();
+        this.datos=datos;
     }
 
     public String getNombreParticular() {
@@ -39,8 +44,16 @@ public class PokemonParticular extends Pokemon{
         return habilidad;
     }
 
-    public void setHabilidad(Habilidad habilidad) {
-        this.habilidad = habilidad;
+    public void setHabilidad(String habilidad) throws HabilidadNoPermitidaExeption{
+        boolean flag = false;
+        for (Habilidad h: datos.getHabilidades() ) {
+            if(h.getNombre().equalsIgnoreCase(habilidad)) {
+                this.habilidad=h;
+                flag = true;
+            }
+        }
+        if(!flag)
+            throw new HabilidadNoPermitidaExeption();
     }
 
     public ArrayList<Movimiento> getMovimientos() {
@@ -50,4 +63,7 @@ public class PokemonParticular extends Pokemon{
     public void setMovimientos(ArrayList<Movimiento> movimientos) {
         this.movimientos = movimientos;
     }
+
+    
+
 }

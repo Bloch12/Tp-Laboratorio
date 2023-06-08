@@ -1,5 +1,6 @@
 package Almacenamiento;
 
+import Exepciones.HabilidadNoPermitidaExeption;
 import Poderes.Habilidad;
 import Pokemones.Pokemon;
 import Pokemones.PokemonParticular;
@@ -56,16 +57,14 @@ public class Equipo {
     {
         pokemones.get(posicion).setNivel(nivel);
     }
-    public void modificarPokemon(int posicion, Habilidad habilidad)
+    public void modificarPokemon(String habilidad,int posicion ) throws HabilidadNoPermitidaExeption
     {
-        if()
-        //funcion que verifique si puede tener la habilidad
-        {
-            pokemones.get(posicion).setHabilidad(habilidad);
-        }
-        else{
-            //Excepcion de habilidad incompatible
-        }
-
+                pokemones.get(posicion).setHabilidad(habilidad);
     }
+
+
+
 }
+
+
+

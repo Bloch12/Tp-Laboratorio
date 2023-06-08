@@ -1,5 +1,7 @@
 package Poderes;
 
+import java.util.Objects;
+
 public class Habilidad extends Poder{
     private boolean oculta;
 
@@ -24,4 +26,17 @@ public class Habilidad extends Poder{
     public void setOculta(boolean oculta) {
         this.oculta = oculta;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        boolean rta= false;
+        if(o!=null && o instanceof Habilidad)
+        {
+            Habilidad aux = (Habilidad)o;
+            rta=aux.getNombre().equals(getNombre());
+        }
+        return rta;
+    }
+
+
 }

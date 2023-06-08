@@ -31,7 +31,7 @@ public class Pokedex {
                 for (int i=0; i < jsonArray.length(); i++){
                     aux = jsonArray.getJSONObject(i);
                     PokemonDatos pokemonAux = new PokemonDatos(aux.getString("url"),aux.getString("name"));
-                    pokemones.put(pokemonAux.getNombre(),pokemonAux);
+                    pokemones.put(pokemonAux.getEspecie(),pokemonAux);
                 }
             }catch(JSONException e){
             }

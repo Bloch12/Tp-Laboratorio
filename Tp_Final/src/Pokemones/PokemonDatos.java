@@ -4,14 +4,17 @@ import ClasesEstaticas.ConsumeApi;
 import Enums.Color;
 import Enums.Tipo;
 import Enums.TipoHuevo;
+import Interfaces.ICargable;
 import Poderes.Habilidad;
+import Poderes.Movimiento;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class PokemonDatos extends Pokemon{
+public class PokemonDatos extends Pokemon implements ICargable {
     private int numPokedex;
     private ArrayList<Habilidad> habilidades;
     private String sprite;
@@ -26,6 +29,8 @@ public class PokemonDatos extends Pokemon{
     private String preevolucion;
     private String evolucion;
     private String metodoDeEvolucion;
+    private HashMap<String, Movimiento> movimientos;
+
 
 
     public PokemonDatos(String url, String nombre) {
@@ -44,15 +49,74 @@ public class PokemonDatos extends Pokemon{
         this.preevolucion = "";
         this.evolucion = "";
         this.metodoDeEvolucion = "";
+        this.movimientos= new HashMap<>();
     }
+
+    public int getNumPokedex() {
+        return numPokedex;
+    }
+
+    protected ArrayList<Habilidad> getHabilidades() {
+        return habilidades;
+    }
+
+    public String getSprite() {
+        return sprite;
+    }
+
+    protected ArrayList<Tipo> getTipos() {
+        return tipos;
+    }
+
+    protected ArrayList<Integer> getEstadisticas() {
+        return estadisticas;
+    }
+
+    public Integer getPeso() {
+        return peso;
+    }
+
+    public Integer getFelicidadBase() {
+        return felicidadBase;
+    }
+
+    public Integer getRadioDeCaptura() {
+        return radioDeCaptura;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    protected ArrayList<TipoHuevo> getGruposHuevo() {
+        return gruposHuevo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public String getPreevolucion() {
+        return preevolucion;
+    }
+
+    public String getEvolucion() {
+        return evolucion;
+    }
+
+    public String getMetodoDeEvolucion() {
+        return metodoDeEvolucion;
+    }
+
+
 
     /**
      * Carga todos los datos de un pokemon sacados de la API pokeAPI
      * @see <a href="https://pokeapi.co/api/v2/pokemon/1/"> https://pokeapi.co/api/v2/pokemon/1/ El 1 se remplaza por el numero donde se encuentra el pokemon el el jsonArray
      * @see ConsumeApi#getInfo(String)
-     * @see PokemonDatos#cargarEspecie(String)
+     * @see PokemonDatos#cargar(String)
      */
-    public void cargarPokemon(){
+    public void cargar(){
         JSONObject jsonObject;
         try {
             jsonObject = new JSONObject(ConsumeApi.getInfo(getUrl()));
@@ -78,12 +142,17 @@ public class PokemonDatos extends Pokemon{
                 }
                 peso = jsonObject.getInt("weight");
                 aux = jsonObject.getJSONObject("species");
-                cargarEspecie(aux.getString("url"));
                 jsonArray = jsonObject.getJSONArray("stats");
                 for(int i = 0; i<jsonArray.length();i++){
                     aux = jsonArray.getJSONObject(i);
                     estadisticas.add(aux.getInt("base_stat"));
                 }
+                jsonArray= jsonObject.getJSONArray("moves");
+                for (int i = 0; i <jsonArray.length() ; i++) {
+                    aux= jsonArray.getJSONObject(i);
+                    movimientos.put(aux.getString("name"),new Movimiento(aux.getString("name"),aux.getString("url")));
+                }
+                cargar(aux.getString("url"));
 
             }catch (JSONException e){
                 System.out.println(e.toString());
@@ -97,7 +166,7 @@ public class PokemonDatos extends Pokemon{
      * @see <a href="https://pokeapi.co/api/v2/pokemon-species/1/"> https://pokeapi.co/api/v2/pokemon-species/1/ El 1 se remplaza por el numero donde se encuentra el pokemon el el jsonArray
      * @see ConsumeApi#getInfo(String)
      */
-    private void cargarEspecie(String url){
+    private void cargar(String url){
         JSONObject jsonObject;
         try {
             jsonObject = new JSONObject(ConsumeApi.getInfo(url));
@@ -138,7 +207,7 @@ public class PokemonDatos extends Pokemon{
     @Override
     public String toString() {
         if(numPokedex==0){
-            cargarPokemon();
+            cargar();
         }
         return
                 "Numero en la Pokedex:" + numPokedex + "\n" +

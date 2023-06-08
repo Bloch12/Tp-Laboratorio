@@ -2,25 +2,25 @@ package Pokemones;
 
 public abstract class Pokemon {
     private String url;
-    private String nombre;
+    private String especie;
 
     public Pokemon(String url, String nombre) {
         this.url = url;
-        this.nombre = nombre;
+        this.especie = nombre;
     }
 
     public String getUrl() {
         return url;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getEspecie() {
+        return especie;
     }
 
 
     @Override
     public String toString() {
-        return "Nombre: " + nombre;
+        return "Nombre: " + especie;
     }
 
 
