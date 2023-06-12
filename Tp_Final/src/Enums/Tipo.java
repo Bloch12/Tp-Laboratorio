@@ -18,5 +18,7 @@ public enum Tipo {
         return url;
     }
 
-
+    public String getTipo() {
+        return tipo;
+    }
 }
