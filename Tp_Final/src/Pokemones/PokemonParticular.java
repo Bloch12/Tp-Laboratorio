@@ -46,22 +46,16 @@ public class PokemonParticular extends Pokemon{
 
     public void setHabilidad(String habilidad) throws HabilidadNoPermitidaExeption{
         boolean flag = false;
-        for (Habilidad h: datos.getHabilidades() ) {
-            if(h.getNombre().equalsIgnoreCase(habilidad)) {
-                this.habilidad=h;
-                flag = true;
-            }
-        }
+        int i = 0;
+        Habilidad aux;
+
         if(!flag)
             throw new HabilidadNoPermitidaExeption();
     }
 
-    public ArrayList<Movimiento> getMovimientos() {
-        return movimientos;
-    }
-
     public void setMovimientos(ArrayList<Movimiento> movimientos) {
-        this.movimientos = movimientos;
+
+        boolean
     }
 
     

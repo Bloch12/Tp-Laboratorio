@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class PokemonDatos extends Pokemon implements ICargable {
     private int numPokedex;
@@ -26,9 +27,8 @@ public class PokemonDatos extends Pokemon implements ICargable {
     private Color color;
     private ArrayList<TipoHuevo> gruposHuevo;
     private String descripcion;
-    private String preevolucion;
-    private String evolucion;
-    private String metodoDeEvolucion;
+
+    private ArrayList<Evolucion> cadenaEvolutiva;
     private HashMap<String, Movimiento> movimientos;
 
 
@@ -46,9 +46,7 @@ public class PokemonDatos extends Pokemon implements ICargable {
         this.color = null;
         this.gruposHuevo = new ArrayList<>();
         this.descripcion = "";
-        this.preevolucion = "";
-        this.evolucion = "";
-        this.metodoDeEvolucion = "";
+        this.cadenaEvolutiva = new ArrayList<>();
         this.movimientos= new HashMap<>();
     }
 
@@ -96,17 +94,6 @@ public class PokemonDatos extends Pokemon implements ICargable {
         return descripcion;
     }
 
-    public String getPreevolucion() {
-        return preevolucion;
-    }
-
-    public String getEvolucion() {
-        return evolucion;
-    }
-
-    public String getMetodoDeEvolucion() {
-        return metodoDeEvolucion;
-    }
 
 
 
@@ -141,7 +128,6 @@ public class PokemonDatos extends Pokemon implements ICargable {
                     tipos.add(Tipo.valueOf(aux.getString("name")));
                 }
                 peso = jsonObject.getInt("weight");
-                aux = jsonObject.getJSONObject("species");
                 jsonArray = jsonObject.getJSONArray("stats");
                 for(int i = 0; i<jsonArray.length();i++){
                     aux = jsonArray.getJSONObject(i);
@@ -149,9 +135,10 @@ public class PokemonDatos extends Pokemon implements ICargable {
                 }
                 jsonArray= jsonObject.getJSONArray("moves");
                 for (int i = 0; i <jsonArray.length() ; i++) {
-                    aux= jsonArray.getJSONObject(i);
+                    aux = jsonArray.getJSONObject(i).getJSONObject("move");
                     movimientos.put(aux.getString("name"),new Movimiento(aux.getString("name"),aux.getString("url")));
                 }
+                aux = jsonObject.getJSONObject("species");
                 cargar(aux.getString("url"));
 
             }catch (JSONException e){
@@ -197,11 +184,58 @@ public class PokemonDatos extends Pokemon implements ICargable {
                         descripcion = aux.getString("flavor_text");
                     }
                 }
+                aux = jsonObject.getJSONObject("evolution_chain");
+                jsonObject = new JSONObject(ConsumeApi.getInfo(aux.getString("url")));
+                aux = jsonObject.getJSONObject("chain");
+                cargar(aux,0);
                 ///Hacer funcion que consuma evolution_chain y saque su evolucion, su preevolucion y su metodo de evolucio
             }catch (JSONException e){
                 System.out.println(e.toString());
             }
         }
+    }
+
+    private void cargar(JSONObject chain, int etapa){
+        JSONObject jsonObject;
+        JSONObject aux;
+        JSONArray jsonArray;
+        Evolucion evolucion = new Evolucion(etapa);
+        try {
+            aux = chain.getJSONObject("species");
+            evolucion.setEspecie(aux.getString("name"));
+            jsonArray = chain.getJSONArray("evolution_details");
+            if(jsonArray.length() > 0){
+                jsonObject = jsonArray.getJSONObject(0);
+                aux = jsonObject.getJSONObject("trigger");
+                evolucion.setTrigger(aux.getString("name"));
+                if(!Objects.equals(jsonObject.get("min_happiness"),null)){
+                    evolucion.setMinFel(jsonObject.getInt("min_happiness"));
+                }
+                if(!Objects.equals(jsonObject.get("held_item"),null)){
+                    aux = jsonObject.getJSONObject("held_item");
+                    evolucion.setObjeto(aux.getString("name"));
+                }
+                if(!Objects.equals(jsonObject.get("item"),null)){
+                    aux = jsonObject.getJSONObject("item");
+                    evolucion.setObjeto(aux.getString("name"));
+                }
+                if(!Objects.equals(jsonObject.get("min_level"),null)){
+                    evolucion.setMinNivel(jsonObject.getInt("min_level"));
+                }
+                if(!Objects.equals(jsonObject.get("min_beauty"),null)){
+                    evolucion.setBellezaMinima(jsonObject.getInt("min_beauty"));
+                }
+                evolucion.setHorario(jsonObject.getString("time_of_day"));
+            }
+            cadenaEvolutiva.add(evolucion);
+            jsonArray = chain.getJSONArray("evolves_to");
+            for(int i=0; i < jsonArray.length();i++){
+                cargar(jsonArray.getJSONObject(i),(etapa + 1));
+            }
+        }catch (JSONException e){
+            System.out.println(e.toString());
+        }
+
     }
 
     @Override
@@ -221,12 +255,8 @@ public class PokemonDatos extends Pokemon implements ICargable {
                 "Radio De Captura:" + radioDeCaptura + "\n" +
                 "Color:" + color + "\n" +
                 "Grupos Huevo:\n" + arregloAString(gruposHuevo) + "\n" +
-                "descripcion:" + descripcion + "\n";
-                        /*
-                "preevolucion='" + preevolucion + '\'' +
-                "evolucion='" + evolucion + '\'' +
-                "metodoDeEvolucion='" + metodoDeEvolucion + '\'';
-                         */
+                "descripcion:" + descripcion + "\n\n\n" +
+                "Cadena:" + arregloAString(cadenaEvolutiva);
     }
 
     /**
@@ -234,7 +264,7 @@ public class PokemonDatos extends Pokemon implements ICargable {
      * @param a el arreglo a listar
      * @return el listado del arreglo
      */
-    private String arregloAString(ArrayList a){
+    public String arregloAString(ArrayList a){
         String rta = "";
         for (int i = 0; i<a.size();i++) {
             rta += a.get(i).toString() + "\n";
