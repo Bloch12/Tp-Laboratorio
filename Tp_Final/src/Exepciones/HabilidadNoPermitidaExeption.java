@@ -2,7 +2,7 @@ package Exepciones;
 
 public class HabilidadNoPermitidaExeption extends Exception{
 
-    public HabilidadNoPermitidaExeption() {
-        super("El pokemon no puede tener esta habilidad");
+    public HabilidadNoPermitidaExeption(String pokemon,String habilidad) {
+        super("El pokemon" + pokemon + " no puede tener la habilidad" + habilidad);
     }
 }

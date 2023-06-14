@@ -1,5 +1,6 @@
 package ClasesEstaticas;
 
+import Interfaces.ICargable;
 import Pokemones.PokemonDatos;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,7 +10,7 @@ import java.util.HashMap;
 
 
 
-public class Pokedex {
+public class Pokedex{
     private static HashMap<String, PokemonDatos> pokemones = new HashMap<>();
 
     /**
@@ -17,7 +18,7 @@ public class Pokedex {
      * @see <a href="https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"> https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0
      * @see ConsumeApi#getInfo(String)
      */
-    public static void cargarPokemones(){
+    public static void cargar(){
         JSONObject jsonObject;
         try {
             jsonObject = new JSONObject(ConsumeApi.getInfo("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"));

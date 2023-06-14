@@ -4,7 +4,7 @@ import Pokemones.PokemonDatos;
 
 public class Main {
     public static void main(String[] args) {
-        Pokedex.cargarPokemones();
+        Pokedex.cargar();
         System.out.println(Pokedex.buscarPokemon("rockruff"));
 
         /*

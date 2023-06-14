@@ -86,9 +86,7 @@ public class PokemonDatos extends Pokemon implements ICargable {
         return color;
     }
 
-    protected ArrayList<TipoHuevo> getGruposHuevo() {
-        return gruposHuevo;
-    }
+    protected  HashMap<String,Movimiento> getMovimientos(){return movimientos;}
 
     public String getDescripcion() {
         return descripcion;
