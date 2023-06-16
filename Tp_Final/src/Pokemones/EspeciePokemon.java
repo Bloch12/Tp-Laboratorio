@@ -6,6 +6,7 @@ import Enums.Color;
 import Enums.Tipo;
 import Enums.TipoHuevo;
 import Interfaces.ICargable;
+import Interfaces.IToJson;
 import Poderes.Habilidad;
 import Poderes.Movimiento;
 import org.json.JSONArray;
@@ -268,7 +269,6 @@ public class EspeciePokemon implements ICargable {
                 "descripcion:" + descripcion + "\n\n\n" +
                 "Cadena:" + GestorDeColecciones.CollecionAString(cadenaEvolutiva);
     }
-
 
 
 }

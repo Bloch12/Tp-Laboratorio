@@ -16,11 +16,19 @@ public class Movimiento extends Poder implements ICargable {
     private Integer precision;
 
 
-    public Movimiento(String nombre, String url, Tipo tipo, String descripcion, Integer pp) {
+    public Movimiento(String nombre, String url, Tipo tipo, String descripcion, Integer pp,Integer precision) {
         super(nombre, url);
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.pp = pp;
+        this.precision = precision;
+    }
+    public Movimiento() {
+        super();
+        this.tipo = null;
+        this.descripcion = "";
+        this.pp = 0;
+        this.precision = 0;
     }
 
     public Movimiento(String nombre, String url) {
@@ -28,6 +36,7 @@ public class Movimiento extends Poder implements ICargable {
         tipo= null;
         descripcion="";
         pp=0;
+        precision = 0;
     }
 
     @Override
@@ -61,11 +70,40 @@ public class Movimiento extends Poder implements ICargable {
 
     @Override
     public String toString() {
-        return  "nomber" + getNombre() + "\n" +
+        return  "nombre" + getNombre() + "\n" +
                 "tipo:" + tipo.getTipo() + "\n" +
                 "tipoDeDaño: " + tipoDeDaño.getTipoDeDaño() + "\n" +
                 "descripcion: " + descripcion + '\n' +
                 "pp: " + pp + '\n' +
                 "precision=" + precision + '\n';
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject jsonObject = super.toJson();
+        try {
+            jsonObject.put("tipo",tipo.name());
+            jsonObject.put("tipoDeDaño",tipoDeDaño.name());
+            jsonObject.put("descripcion",descripcion);
+            jsonObject.put("pp",pp);
+            jsonObject.put("precision",precision);
+        }
+        catch (JSONException e)
+        {
+        }
+        return jsonObject;
+    }
+
+    @Override
+    public void toObject(JSONObject jsonObject) {
+        super.toObject(jsonObject);
+        try {
+            tipo = Tipo.valueOf(jsonObject.getString("tipo"));
+            tipoDeDaño = TipoDeDaño.valueOf(jsonObject.getString("tipoDeDaño"));
+            descripcion =  jsonObject.getString("descripcion");
+            pp =  jsonObject.getInt("pp");
+            precision =  jsonObject.getInt("precision");
+        }catch (JSONException e){
+        }
     }
 }
