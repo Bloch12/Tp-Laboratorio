@@ -1,10 +1,14 @@
 package Pokemones;
 
+import Almacenamiento.AlmacenamientoDeDatos;
 import ClasesEstaticas.ConsumeApi;
 import ClasesEstaticas.GestorDeColecciones;
 import Enums.Color;
 import Enums.Tipo;
 import Enums.TipoHuevo;
+import Exepciones.HabilidadNoPermitidaExeption;
+import Exepciones.MaximaCantidadDeMovimientosSobrepasadaExeption;
+import Exepciones.MovimientoNoPermitidoExeption;
 import Interfaces.ICargable;
 import Interfaces.IToJson;
 import Poderes.Habilidad;
@@ -33,7 +37,7 @@ public class EspeciePokemon implements ICargable {
     private String descripcion;
 
     private ArrayList<Evolucion> cadenaEvolutiva;
-    private HashMap<String, Movimiento> movimientos;
+    private AlmacenamientoDeDatos<Movimiento> movimientos;
 
 
 
@@ -52,7 +56,7 @@ public class EspeciePokemon implements ICargable {
         this.gruposHuevo = new ArrayList<>();
         this.descripcion = "";
         this.cadenaEvolutiva = new ArrayList<>();
-        this.movimientos= new HashMap<>();
+        this.movimientos= new AlmacenamientoDeDatos<>();
     }
 
     public String getUrl() {
@@ -67,20 +71,8 @@ public class EspeciePokemon implements ICargable {
         return numPokedex;
     }
 
-    protected ArrayList<Habilidad> getHabilidades() {
-        return habilidades;
-    }
-
     public String getSprite() {
         return sprite;
-    }
-
-    protected ArrayList<Tipo> getTipos() {
-        return tipos;
-    }
-
-    protected ArrayList<Integer> getEstadisticas() {
-        return estadisticas;
     }
 
     public Integer getPeso() {
@@ -98,8 +90,6 @@ public class EspeciePokemon implements ICargable {
     public Color getColor() {
         return color;
     }
-
-    protected  HashMap<String,Movimiento> getMovimientos(){return movimientos;}
 
     public String getDescripcion() {
         return descripcion;
@@ -147,7 +137,7 @@ public class EspeciePokemon implements ICargable {
                 jsonArray= jsonObject.getJSONArray("moves");
                 for (int i = 0; i <jsonArray.length() ; i++) {
                     aux = jsonArray.getJSONObject(i).getJSONObject("move");
-                    movimientos.put(aux.getString("name"),new Movimiento(aux.getString("name"),aux.getString("url")));
+                    movimientos.agregar(aux.getString("name"),new Movimiento(aux.getString("name"),aux.getString("url")));
                 }
                 aux = jsonObject.getJSONObject("species");
                 cargar(aux.getString("url"));
@@ -256,7 +246,7 @@ public class EspeciePokemon implements ICargable {
         }
         return
                 "Numero en la Pokedex:" + numPokedex + "\n" +
-                super.toString() + "\n" +
+                "Especie: " + especie + "\n" +
                 "Habilidades:\n" + GestorDeColecciones.CollecionAString(habilidades)  + "\n" +
                 "Sprite:" + sprite +  "\n" +
                 "Tipos:\n" + GestorDeColecciones.CollecionAString(tipos) + "\n" +
@@ -268,6 +258,26 @@ public class EspeciePokemon implements ICargable {
                 "Grupos Huevo:\n" + GestorDeColecciones.CollecionAString(gruposHuevo) + "\n" +
                 "descripcion:" + descripcion + "\n\n\n" +
                 "Cadena:" + GestorDeColecciones.CollecionAString(cadenaEvolutiva);
+    }
+
+    Habilidad buscarHabilidad(String habilidad) throws HabilidadNoPermitidaExeption{
+        int i = 0;
+        Habilidad aux;
+        while(i < habilidades.size()){
+            aux = habilidades.get(i);
+            if(aux.getNombre().equals(habilidad)){
+                return aux;
+            }
+        }
+        throw new HabilidadNoPermitidaExeption(especie,habilidad);
+    }
+
+    Movimiento buscarMovimiento(String movimiento) throws MovimientoNoPermitidoExeption{
+        if(movimientos.contienteClave(movimiento)){
+                return movimientos.buscar(movimiento);
+        }else{
+            throw new MovimientoNoPermitidoExeption(especie,movimiento);
+        }
     }
 
 

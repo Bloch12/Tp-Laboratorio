@@ -1,5 +1,6 @@
 package ClasesEstaticas;
 
+import Almacenamiento.AlmacenamientoDeDatos;
 import Pokemones.EspeciePokemon;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 
 
 public class Pokedex{
-    private static HashMap<String, EspeciePokemon> pokemones = new HashMap<>();
+    private static AlmacenamientoDeDatos<EspeciePokemon> pokemones = new AlmacenamientoDeDatos();
 
     /**
      * Carga el mapa pokemones con todos los pokemones de la API pokeapi , su clave es el mismo nombre del pokemon.
@@ -31,7 +32,7 @@ public class Pokedex{
                 for (int i=0; i < jsonArray.length(); i++){
                     aux = jsonArray.getJSONObject(i);
                     EspeciePokemon pokemonAux = new EspeciePokemon(aux.getString("url"),aux.getString("name"));
-                    pokemones.put(pokemonAux.getEspecie(),pokemonAux);
+                    pokemones.agregar(pokemonAux.getEspecie(),pokemonAux);
                 }
             }catch(JSONException e){
             }
@@ -45,14 +46,7 @@ public class Pokedex{
      * @see EspeciePokemon#toString
      * @throws NullPointerException
      */
-    public static String buscarPokemon(String nombre){
-        try {
-            return pokemones.get(nombre).toString();
-        }catch (NullPointerException e){
-            return "Pokemon No Encontrado";
-        }
-
+    public static EspeciePokemon buscarPokemon(String nombre){
+            return pokemones.buscar(nombre);
     }
-
-
 }

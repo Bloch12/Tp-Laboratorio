@@ -14,7 +14,6 @@ import Enums.IE;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class Pokemon implements IToJson {
@@ -22,19 +21,17 @@ public class Pokemon implements IToJson {
     private Integer nivel;
     private Habilidad habilidad;
     private ArrayList<Movimiento> movimientos;
-    private EspeciePokemon datos;
+    private String especie;
     private ArrayList<Integer> ivs;
     private ArrayList<Integer> evs;
     private Naturaleza naturaleza;
 
 
-
-
-    public Pokemon(EspeciePokemon datos) {
-        this.nombreParticular = datos.getEspecie();
+    public Pokemon(String especie) {
+        this.nombreParticular = especie;
         this.nivel = 100;
-        this.datos= datos;
-        this.habilidad = datos.getHabilidades().get(0);
+        this.especie = especie;
+        this.habilidad = null;
         movimientos = new ArrayList<>();
         this.evs = new ArrayList<>();
         for(int i=0; i<6;i++){
@@ -46,10 +43,11 @@ public class Pokemon implements IToJson {
         }
         this.naturaleza = Naturaleza.Docil;
     }
+
     public Pokemon() {
         this.nombreParticular = "";
         this.nivel = 100;
-        this.datos= null;
+        this.especie = null;
         this.habilidad = null;
         movimientos = new ArrayList<>();
         this.evs = new ArrayList<>();
@@ -84,30 +82,20 @@ public class Pokemon implements IToJson {
     }
 
     public void setHabilidad(String habilidad) throws HabilidadNoPermitidaExeption{
-        boolean flag = false;
-        int i = 0;
-        Habilidad aux;
-        while(i < datos.getHabilidades().size() && !flag){
-            aux = datos.getHabilidades().get(i);
-            if(aux.getNombre().equals(habilidad)){
-                this.habilidad = aux;
-                flag = true;
-            }
-        }
-        if(!flag)
-            throw new HabilidadNoPermitidaExeption(datos.getEspecie(),habilidad);
+       this.habilidad = getDatosEspecie().buscarHabilidad(habilidad);
+    }
+
+    private EspeciePokemon getDatosEspecie(){
+        return Pokedex.buscarPokemon(especie);
     }
 
     public void setMovimientos(String movimiento) throws MaximaCantidadDeMovimientosSobrepasadaExeption,MovimientoNoPermitidoExeption {
-        if(datos.getMovimientos().containsKey(movimiento)){
-            if(datos.getMovimientos().size() < 4){
-                movimientos.add(datos.getMovimientos().get(movimiento));
-            }else{
-                throw new MaximaCantidadDeMovimientosSobrepasadaExeption();
-            }
-        }else{
-            throw new MovimientoNoPermitidoExeption(datos.getEspecie(),movimiento);
-        }
+          Movimiento aux = getDatosEspecie().buscarMovimiento(movimiento);
+          if(movimientos.size() < 4){
+              movimientos.add(aux);
+          }else{
+              throw new MaximaCantidadDeMovimientosSobrepasadaExeption();
+          }
     }
 
     public void setIvs(int iv,IE estadistica) throws ValorNoValidoExeption {
@@ -153,7 +141,7 @@ public class Pokemon implements IToJson {
         JSONArray jsonArray = new JSONArray();
         try {
             jsonObject.put("nombrePokemon",nombreParticular);
-            jsonObject.put("especie",datos.getEspecie());
+            jsonObject.put("especie",especie);
             jsonObject.put("nivel",nivel);
             for (int i = 0; i < movimientos.size(); i++)
             {
@@ -184,9 +172,7 @@ public class Pokemon implements IToJson {
         JSONArray jsonArray = new JSONArray();
         try {
             nombreParticular = jsonObject.getString("nombrePokemon");
-            //cargar los datos
-            /*datos =
-            jsonObject.put("especie",datos.getEspecie());*/
+            especie = jsonObject.getString("especie");
             nivel = jsonObject.getInt("nivel");
             jsonArray = jsonObject.getJSONArray("movimientos");
             for (int i = 0; i < jsonArray.length(); i++)
@@ -213,6 +199,5 @@ public class Pokemon implements IToJson {
         catch (JSONException e)
         {
         }
-
     }
 }

@@ -125,6 +125,8 @@ public class Equipo implements IToJson {
         }catch (JSONException e){
         }
     }
+
+
 }
 
 
