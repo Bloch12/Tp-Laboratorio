@@ -1,6 +1,4 @@
 import ClasesEstaticas.Pokedex;
-import Poderes.Movimiento;
-import Pokemones.PokemonDatos;
 
 public class Main {
     public static void main(String[] args) {

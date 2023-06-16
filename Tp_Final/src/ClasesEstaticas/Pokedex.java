@@ -1,7 +1,6 @@
 package ClasesEstaticas;
 
-import Interfaces.ICargable;
-import Pokemones.PokemonDatos;
+import Pokemones.EspeciePokemon;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,7 +10,7 @@ import java.util.HashMap;
 
 
 public class Pokedex{
-    private static HashMap<String, PokemonDatos> pokemones = new HashMap<>();
+    private static HashMap<String, EspeciePokemon> pokemones = new HashMap<>();
 
     /**
      * Carga el mapa pokemones con todos los pokemones de la API pokeapi , su clave es el mismo nombre del pokemon.
@@ -31,7 +30,7 @@ public class Pokedex{
                 JSONObject aux;
                 for (int i=0; i < jsonArray.length(); i++){
                     aux = jsonArray.getJSONObject(i);
-                    PokemonDatos pokemonAux = new PokemonDatos(aux.getString("url"),aux.getString("name"));
+                    EspeciePokemon pokemonAux = new EspeciePokemon(aux.getString("url"),aux.getString("name"));
                     pokemones.put(pokemonAux.getEspecie(),pokemonAux);
                 }
             }catch(JSONException e){
@@ -43,7 +42,7 @@ public class Pokedex{
      * busca un pokemon por su nombre y te retorna su informacion
      * @param nombre pokemon a buscar
      * @return Si lo encuentra String con toda la informacion del pokemon, Si no lo encentra "Pokemon No Encontrado"
-     * @see PokemonDatos#toString
+     * @see EspeciePokemon#toString
      * @throws NullPointerException
      */
     public static String buscarPokemon(String nombre){

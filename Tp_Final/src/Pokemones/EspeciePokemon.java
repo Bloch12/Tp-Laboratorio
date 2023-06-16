@@ -1,6 +1,7 @@
 package Pokemones;
 
 import ClasesEstaticas.ConsumeApi;
+import ClasesEstaticas.GestorDeColecciones;
 import Enums.Color;
 import Enums.Tipo;
 import Enums.TipoHuevo;
@@ -15,7 +16,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class PokemonDatos extends Pokemon implements ICargable {
+public class EspeciePokemon implements ICargable {
+    private String url;
+    private String especie;
     private int numPokedex;
     private ArrayList<Habilidad> habilidades;
     private String sprite;
@@ -33,8 +36,9 @@ public class PokemonDatos extends Pokemon implements ICargable {
 
 
 
-    public PokemonDatos(String url, String nombre) {
-        super(url, nombre);
+    public EspeciePokemon(String url, String especie) {
+        this.url = url;
+        this.especie = especie;
         this.numPokedex = 0;
         this.habilidades = new ArrayList<>();
         this.sprite = "";
@@ -48,6 +52,14 @@ public class PokemonDatos extends Pokemon implements ICargable {
         this.descripcion = "";
         this.cadenaEvolutiva = new ArrayList<>();
         this.movimientos= new HashMap<>();
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getEspecie() {
+        return especie;
     }
 
     public int getNumPokedex() {
@@ -99,7 +111,7 @@ public class PokemonDatos extends Pokemon implements ICargable {
      * Carga todos los datos de un pokemon sacados de la API pokeAPI
      * @see <a href="https://pokeapi.co/api/v2/pokemon/1/"> https://pokeapi.co/api/v2/pokemon/1/ El 1 se remplaza por el numero donde se encuentra el pokemon el el jsonArray
      * @see ConsumeApi#getInfo(String)
-     * @see PokemonDatos#cargar(String)
+     * @see EspeciePokemon#cargar(String)
      */
     public void cargar(){
         JSONObject jsonObject;
@@ -244,29 +256,19 @@ public class PokemonDatos extends Pokemon implements ICargable {
         return
                 "Numero en la Pokedex:" + numPokedex + "\n" +
                 super.toString() + "\n" +
-                "Habilidades:\n" + arregloAString(habilidades)  + "\n" +
+                "Habilidades:\n" + GestorDeColecciones.CollecionAString(habilidades)  + "\n" +
                 "Sprite:" + sprite +  "\n" +
-                "Tipos:\n" + arregloAString(tipos) + "\n" +
-                "Estadisticas:\n" + arregloAString(estadisticas) + "\n" +
+                "Tipos:\n" + GestorDeColecciones.CollecionAString(tipos) + "\n" +
+                "Estadisticas:\n" + GestorDeColecciones.CollecionAString(estadisticas) + "\n" +
                 "Peso: " + peso + "\n" +
                 "Felicidad Base:" + felicidadBase + "\n" +
                 "Radio De Captura:" + radioDeCaptura + "\n" +
                 "Color:" + color + "\n" +
-                "Grupos Huevo:\n" + arregloAString(gruposHuevo) + "\n" +
+                "Grupos Huevo:\n" + GestorDeColecciones.CollecionAString(gruposHuevo) + "\n" +
                 "descripcion:" + descripcion + "\n\n\n" +
-                "Cadena:" + arregloAString(cadenaEvolutiva);
+                "Cadena:" + GestorDeColecciones.CollecionAString(cadenaEvolutiva);
     }
 
-    /**
-     * se le pasa un arreglo y lo lista
-     * @param a el arreglo a listar
-     * @return el listado del arreglo
-     */
-    public String arregloAString(ArrayList a){
-        String rta = "";
-        for (int i = 0; i<a.size();i++) {
-            rta += a.get(i).toString() + "\n";
-        }
-        return rta;
-    }
+
+
 }

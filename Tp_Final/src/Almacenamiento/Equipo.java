@@ -1,15 +1,13 @@
 package Almacenamiento;
 
 import Exepciones.HabilidadNoPermitidaExeption;
-import Poderes.Habilidad;
 import Pokemones.Pokemon;
-import Pokemones.PokemonParticular;
 
 import java.util.ArrayList;
 
 public class Equipo {
     private String nombre;
-    private ArrayList<PokemonParticular> pokemones;
+    private ArrayList<Pokemon> pokemones;
     private boolean estado;
 
     public Equipo(String nombre) {
@@ -34,7 +32,7 @@ public class Equipo {
         this.estado = estado;
     }
 
-    public void agregarPokemon(PokemonParticular pokemon)
+    public void agregarPokemon(Pokemon pokemon)
     {
         if(pokemones.size() < 6)
         {
