@@ -3,6 +3,7 @@ package ClasesEstaticas;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 
 public class GestorDeColecciones {
 
@@ -40,7 +41,7 @@ public class GestorDeColecciones {
         return rta;
     }
 
-    public static String CollecionAString(HashSet set) {
+    public static String CollecionAString(LinkedHashSet set) {
         String rta = "";
         Iterator it = set.iterator();
         while(it.hasNext()){

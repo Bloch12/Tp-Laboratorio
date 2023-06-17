@@ -2,10 +2,7 @@ package Almacenamiento;
 
 import Enums.IE;
 import Enums.Naturaleza;
-import Exepciones.HabilidadNoPermitidaExeption;
-import Exepciones.MaximaCantidadDeMovimientosSobrepasadaExeption;
-import Exepciones.MovimientoNoPermitidoExeption;
-import Exepciones.ValorNoValidoExeption;
+import Exepciones.*;
 import Interfaces.IToJson;
 import Poderes.Movimiento;
 import Pokemones.Pokemon;
@@ -26,6 +23,12 @@ public class Equipo implements IToJson {
         estado = true;
     }
 
+    public Equipo() {
+        nombre="";
+        pokemones = new ArrayList<>();
+        estado = true;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -42,14 +45,14 @@ public class Equipo implements IToJson {
         this.estado = estado;
     }
 
-    public void agregarPokemon(Pokemon pokemon)
+    public void agregarPokemon(Pokemon pokemon) throws EquipoLlenoExeption
     {
         if(pokemones.size() < 6)
         {
             pokemones.add(pokemon);
         }
-        else {//lanzar excepcion de equipo lleno
-
+        else {
+            throw new EquipoLlenoExeption(nombre);
         }
     }
     public void quitarPokemon(int posicion)
