@@ -135,6 +135,10 @@ public class Pokemon implements IToJson {
         }
     }
 
+    public void evolucionar(){
+        //a implementar
+    }
+
     @Override
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();

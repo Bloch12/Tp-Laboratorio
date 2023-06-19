@@ -17,7 +17,7 @@ public class GestorDeEquipo implements IToJson {
     {
         Equipo aux= new Equipo(nombreEquipo);
         if(!listaDeEquipos.add(aux))
-            throw new ValorNoValidoExeption("El equipo ya existe");
+            throw new ValorNoValidoExeption("El equipo " + nombreEquipo + " ya existe");
     }
 
     public static void cambiarEstadoEquipo(Equipo equipo)
@@ -41,14 +41,29 @@ public class GestorDeEquipo implements IToJson {
     }
 
     public static Equipo getEquipo(int pos) throws ValorNoValidoExeption{
-
-        if(listaDeEquipos.size()>pos){
+       if(listaDeEquipos.size()>pos){
             Equipo[] a = new Equipo[listaDeEquipos.size()];
             a =listaDeEquipos.toArray(a);
             return a[pos];
         }
         else
             throw new ValorNoValidoExeption("Posicion no valida");
+    }
+    public static Equipo getEquipo(String nombre) throws ValorNoValidoExeption{
+
+            Equipo[] a = new Equipo[listaDeEquipos.size()];
+            a = listaDeEquipos.toArray(a);
+            for(int i =0; i<listaDeEquipos.size();i++){
+                if(a[i].getNombre().equalsIgnoreCase(nombre)){
+                    return a[i];
+                }
+            }
+            throw new ValorNoValidoExeption("Nombre no Encontrado");
+
+    }
+
+    public static String listarEquipo(){
+        return GestorDeColecciones.CollecionAString(listaDeEquipos);
     }
 
     @Override

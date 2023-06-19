@@ -1,15 +1,30 @@
 package Objetos;
+import Almacenamiento.Equipo;
 
-import Interfaces.ICargable;
+import java.io.Serializable;
 
-public abstract class Objeto implements ICargable {
-    private String nobre;
-    private String url;
+public abstract class Objeto implements Serializable {
+    private String nombre;
     private int costo;
-    private String descripcion;
+    public Objeto(String nombre, int costo) {
+        this.nombre = nombre;
+        this.costo = costo;
+    }
 
+    public String getNombre() {
+        return nombre;
+    }
 
+    public int getCosto() {
+        return costo;
+    }
 
+    @Override
+    public String toString() {
+        return nombre + " " + costo + " ";
+    }
+
+    public abstract String usar(Equipo equipo, int pokemon);
 
 
 }

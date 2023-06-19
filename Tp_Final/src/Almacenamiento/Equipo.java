@@ -55,43 +55,22 @@ public class Equipo implements IToJson {
             throw new EquipoLlenoExeption(nombre);
         }
     }
-    public void quitarPokemon(int posicion)
+    public void quitarPokemon(int posicion) throws ValorNoValidoExeption
     {
-        pokemones.remove(posicion);
+        if(pokemones.size() > posicion)
+            pokemones.remove(posicion);
+        else
+            throw new ValorNoValidoExeption("posicion invalida");
     }
 
-    public void modificarPokemon(int posicion,String nombre)
-    {
-        pokemones.get(posicion).setNombreParticular(nombre);
-    }
-    public void modificarPokemon(int posicion,int nivel)
-    {
-        pokemones.get(posicion).setNivel(nivel);
-    }
-    public void modificarPokemon(String habilidad,int posicion ) throws HabilidadNoPermitidaExeption
-    {
-        pokemones.get(posicion).setHabilidad(habilidad);
+    public Pokemon getPokemon(int posicion) throws ValorNoValidoExeption {
+        if (pokemones.size() > posicion)
+            return pokemones.get(posicion);
+        else
+            throw new ValorNoValidoExeption("posicion invalida");
     }
 
-    public void modificarIvs(int posicion, int ivs, IE estadistica)throws ValorNoValidoExeption
-    {
-        pokemones.get(posicion).setIvs(ivs,estadistica);
-    }
-    public void modificarEvs(int posicion, int evs,IE estadistica)throws ValorNoValidoExeption
-    {
-        pokemones.get(posicion).setEvs(evs,estadistica);
-    }
-    public void modificarPokemon(int posicion, Naturaleza naturaleza)
-    {
-        pokemones.get(posicion).setNaturaleza(naturaleza);
-    }
-    public void agregarMovimiento(int posicion, String movimiento)throws MovimientoNoPermitidoExeption, MaximaCantidadDeMovimientosSobrepasadaExeption
-    {
-        pokemones.get(posicion).setMovimientos(movimiento);
-    }
-    public void quitarMovimiento(int posicion,int posMovimiento) throws ValorNoValidoExeption {
-        pokemones.get(posicion).eliminarMovimiento(posMovimiento);
-    }
+
 
     @Override
     public JSONObject toJson()  {
