@@ -65,6 +65,8 @@ public class Pokemon implements IToJson {
         return nombreParticular;
     }
 
+    public String listarMovimientos(){return GestorDeColecciones.CollecionAString(movimientos);}
+
     public void setNombreParticular(String nombreParticular) {
         this.nombreParticular = nombreParticular;
     }
@@ -73,8 +75,13 @@ public class Pokemon implements IToJson {
         return nivel;
     }
 
-    public void setNivel(Integer nivel) {
-        this.nivel = nivel;
+    public void setNivel(Integer nivel) throws ValorNoValidoExeption {
+        if(nivel > 0 && nivel <= 100){
+            this.nivel = nivel;
+        }else{
+            throw new ValorNoValidoExeption("El nivel debe estar entre 1 & 100");
+        }
+
     }
 
     public Habilidad getHabilidad() {
@@ -92,7 +99,11 @@ public class Pokemon implements IToJson {
     public void setMovimientos(String movimiento) throws MaximaCantidadDeMovimientosSobrepasadaExeption,MovimientoNoPermitidoExeption {
           Movimiento aux = getDatosEspecie().buscarMovimiento(movimiento);
           if(movimientos.size() < 4){
-              movimientos.add(aux);
+              if(!movimientos.contains(aux)){
+                  movimientos.add(aux);
+              }else{
+                throw new MovimientoNoPermitidoExeption(nombreParticular,movimiento + " porque ya lo conoce");
+              }
           }else{
               throw new MaximaCantidadDeMovimientosSobrepasadaExeption();
           }

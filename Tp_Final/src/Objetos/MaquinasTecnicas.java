@@ -3,6 +3,7 @@ package Objetos;
 import Almacenamiento.Equipo;
 import Exepciones.MaximaCantidadDeMovimientosSobrepasadaExeption;
 import Exepciones.MovimientoNoPermitidoExeption;
+import Exepciones.ValorNoValidoExeption;
 
 public class MaquinasTecnicas extends Objeto{
     private String movimiento;
@@ -19,10 +20,12 @@ public class MaquinasTecnicas extends Objeto{
     @Override
     public String usar(Equipo equipo, int pokemon) {
         try {
-            equipo.agregarMovimiento(pokemon,movimiento);
+            equipo.getPokemon(pokemon).setMovimientos(movimiento);
         }catch (MovimientoNoPermitidoExeption e){
             return e.getMessage();
         }catch (MaximaCantidadDeMovimientosSobrepasadaExeption e){
+            return e.getMessage();
+        }catch (ValorNoValidoExeption e){
             return e.getMessage();
         }
         return "el pokemon a aprendido el movimiento correctamente";

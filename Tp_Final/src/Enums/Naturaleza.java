@@ -1,7 +1,7 @@
 package Enums;
 
 public enum Naturaleza {
-    Fuerte("fuerte", IE.No, IE.No), Osada("osada", IE.Atq, IE.Deff),Miedosa("miedosa",IE.Atq,IE.Vel),Modesta("modesta",IE.Atq,IE.EspAtq),Serena("serena",IE.Atq,IE.EspDeff), Huraña("Huraña",IE.Deff,IE.Atq),
+    fuerte("fuerte", IE.No, IE.No), osada("osada", IE.Atq, IE.Deff),Miedosa("miedosa",IE.Atq,IE.Vel),Modesta("modesta",IE.Atq,IE.EspAtq),Serena("serena",IE.Atq,IE.EspDeff), Huraña("Huraña",IE.Deff,IE.Atq),
     Docil("docil",IE.No,IE.No),Activa("activa",IE.Deff,IE.Vel),Afable("afable",IE.Deff,IE.EspAtq),Amable("amable",IE.Deff,IE.EspDeff),Audaz("audaz",IE.Deff,IE.Atq),Placida("placida",IE.Vel,IE.Deff),
     Seria("seria",IE.No,IE.No),Mansa("mansa",IE.Vel,IE.EspAtq);
 

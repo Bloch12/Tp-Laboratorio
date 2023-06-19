@@ -1,10 +1,9 @@
 package ClasesEstaticas;
 
 import Almacenamiento.Equipo;
-import Exepciones.EquipoLlenoExeption;
-import Exepciones.MaximaCantidadDeMovimientosSobrepasadaExeption;
-import Exepciones.MovimientoNoPermitidoExeption;
-import Exepciones.ValorNoValidoExeption;
+import Enums.IE;
+import Enums.Naturaleza;
+import Exepciones.*;
 import Pokemones.Pokemon;
 
 import java.util.Scanner;
@@ -13,7 +12,7 @@ public class Menu {
 
     private static Scanner teclado=new Scanner(System.in);
     public static void menu(){
-        int opc
+        int opc;
         do {
             System.out.println("A que menu quiere acceder?");
             System.out.println("1. Pokedex");
@@ -180,40 +179,139 @@ public class Menu {
                     System.out.println("Ingrese el movimiento a aprender");
                     teclado.nextLine();
                     String movimiento;
+                    movimiento = teclado.nextLine();
                     try{
-                        movimiento = teclado.nextLine();
                         pokemon.setMovimientos(movimiento);
+                        System.out.println(pokemon.getNombreParticular() + " Aprendio " + movimiento);
                     }catch (MovimientoNoPermitidoExeption e){
                         System.out.println(e.toString());
                     }catch (MaximaCantidadDeMovimientosSobrepasadaExeption e){
-                        System.out.println("");
+                        System.out.println(pokemon.getNombreParticular() + " Intenta aprender " + movimiento + ". \nPero, " +pokemon.getNombreParticular() +
+                                " ya conoce cuatro movimientos.\n Deseas remplazar un movimiento ya existente con  " + movimiento);
+                        System.out.println("1. Si");
+                        System.out.println("2. No");
+                        do
+                            opc = teclado.nextInt();
+                        while (opc != 1 && opc != 2);
+                        if(opc == 1){
+                            eliminarMovimiento(pokemon);
+                            try {
+                                pokemon.setMovimientos(movimiento);
+                                System.out.println(pokemon.getNombreParticular() + " Aprendio " + movimiento);
+                            }catch(MaximaCantidadDeMovimientosSobrepasadaExeption e1){
+                                System.out.println(pokemon.getNombreParticular() + "No aprendio " + movimiento);
+                            }catch(MovimientoNoPermitidoExeption e1){
+                            }
+                        }
                     }
-
                     break;
                 case 2:
-                    GestorDeEquipo.cambiarEstadoEquipo(equipo);
+                    eliminarMovimiento(pokemon);
                     break;
                 case 3:
-                    try {
-                        equipo.agregarPokemon(crearPokemon());
+                    System.out.println("Ingrese el nuevo mote");
+                    teclado.nextLine();
+                    pokemon.setNombreParticular(teclado.nextLine());
+                    break;
+                case 4:
+                    System.out.println("Ingrese el nuevo nivel");
+                    try{
+                        pokemon.setNivel(teclado.nextInt());
                     }catch (ValorNoValidoExeption e){
-                    }catch (EquipoLlenoExeption e){
                         System.out.println(e.getMessage());
                     }
                     break;
-                case 4:
-                    System.out.println("Ingrerse la posicion del pokemon a eliminar");
+                case 5:
+                    System.out.println("ingrese la estadistica a cambiar \n1.Hp \n2.Atq \n3.Deff \n4.EspAtq \n5.EspDeff \n6.Vel");
+                    do {
+                        opc = teclado.nextInt();
+                    }while (opc < 1 || opc > 6);
+                    IE estadisticaEv = IE.No;
+                    switch (opc){
+                        case 1: estadisticaEv = IE.Hp;
+                            break;
+                        case 2: estadisticaEv = IE.Atq;
+                            break;
+                        case 3: estadisticaEv = IE.Deff;
+                            break;
+                        case 4: estadisticaEv = IE.EspAtq;
+                            break;
+                        case 5: estadisticaEv = IE.EspDeff;
+                            break;
+                        case 6: estadisticaEv = IE.Vel;
+                            break;
+                    }
+                    System.out.println("Ingrese el nuevo valor del ev");
                     try {
-                        equipo.quitarPokemon(teclado.nextInt());
+                        pokemon.setEvs(teclado.nextInt(),estadisticaEv);
                     }catch (ValorNoValidoExeption e){
                         System.out.println(e.getMessage());
                     }
-                case 5:
-
-
+                    break;
+                case 6:
+                    System.out.println("ingrese la estadistica a cambiar \n1.Hp \n2.Atq \n3.Deff \n4.EspAtq \n5.EspDeff \n6.Vel");
+                    do {
+                        opc = teclado.nextInt();
+                    }while (opc < 1 || opc > 6);
+                    IE estadisticaIv = IE.No;
+                    switch (opc){
+                        case 1: estadisticaIv = IE.Hp;
+                            break;
+                        case 2: estadisticaIv = IE.Atq;
+                            break;
+                        case 3: estadisticaIv = IE.Deff;
+                            break;
+                        case 4: estadisticaIv = IE.EspAtq;
+                            break;
+                        case 5: estadisticaIv = IE.EspDeff;
+                            break;
+                        case 6: estadisticaIv = IE.Vel;
+                            break;
+                    }
+                    System.out.println("Ingrese el nuevo valor del iv");
+                    try {
+                        pokemon.setIvs(teclado.nextInt(),estadisticaIv);
+                    }catch (ValorNoValidoExeption e){
+                        System.out.println(e.getMessage());
+                    }
+                case 7:
+                    System.out.println("Ingrese la nueva naturaleza");
+                    teclado.nextLine();
+                    try {
+                        pokemon.setNaturaleza(Naturaleza.valueOf(teclado.nextLine()));
+                    }catch(IllegalArgumentException e){
+                        System.out.println("No existe esa naturaleza");
+                    }
+                    break;
+                case 8:
+                    System.out.println("Ingrese la nueva habilidad");
+                    teclado.nextLine();
+                    try {
+                        pokemon.setHabilidad(teclado.nextLine());
+                    }catch (HabilidadNoPermitidaExeption e){
+                        System.out.println(e.getMessage());
+                    }
             }
 
         }while (opc != 0);
+    }
+
+    private static void eliminarMovimiento(Pokemon pokemon){
+        System.out.println(pokemon.listarMovimientos());
+        System.out.println("Ingrese el numero del movimiento a olvidar O 0 para cancelar");
+        int opc;
+        opc = teclado.nextInt();
+        do {
+            try {
+                pokemon.eliminarMovimiento(opc - 1);
+                System.out.println("movimiento olvidado correctamente");
+                opc = 0;
+            } catch (ValorNoValidoExeption e) {
+                System.out.println("Ingrese un numero valido o 0 para cancelar");
+                opc = teclado.nextInt();
+            }
+        }while(opc != 0);
+
     }
 
 }
