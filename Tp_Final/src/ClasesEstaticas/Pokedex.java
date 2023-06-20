@@ -47,6 +47,13 @@ public class Pokedex{
      * @throws NullPointerException
      */
     public static EspeciePokemon buscarPokemon(String nombre){
-            return pokemones.buscar(nombre);
+        EspeciePokemon aux = pokemones.buscar(nombre);
+        if(aux.getNumPokedex()==0)
+            aux.cargar();
+        return pokemones.buscar(nombre);
+    }
+
+    public static boolean existePokemon(String nombre){
+       return pokemones.contienteClave(nombre);
     }
 }

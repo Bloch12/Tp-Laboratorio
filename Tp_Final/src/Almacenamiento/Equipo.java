@@ -1,5 +1,7 @@
 package Almacenamiento;
 
+import ClasesEstaticas.GestorDeColecciones;
+import ClasesEstaticas.Pokedex;
 import Enums.IE;
 import Enums.Naturaleza;
 import Exepciones.*;
@@ -45,15 +47,17 @@ public class Equipo implements IToJson {
         this.estado = estado;
     }
 
-    public void agregarPokemon(Pokemon pokemon) throws EquipoLlenoExeption
+    public void agregarPokemon(Pokemon pokemon) throws EquipoLlenoExeption, ValorNoValidoExeption
     {
-        if(pokemones.size() < 6)
-        {
-            pokemones.add(pokemon);
+        if(Pokedex.existePokemon(pokemon.getNombreParticular())) {
+            if (pokemones.size() < 6) {
+                pokemones.add(pokemon);
+            } else {
+                throw new EquipoLlenoExeption(nombre);
+            }
         }
-        else {
-            throw new EquipoLlenoExeption(nombre);
-        }
+        else
+            throw new ValorNoValidoExeption("El pokemon no existe");
     }
     public void quitarPokemon(int posicion) throws ValorNoValidoExeption
     {
@@ -71,6 +75,14 @@ public class Equipo implements IToJson {
     }
 
 
+    @Override
+    public String toString() {
+        return "Equipo{" +
+                "nombre='" + nombre + '\'' +
+                ", pokemones=" + pokemones +
+                ", estado=" + estado +
+                '}';
+    }
 
     @Override
     public JSONObject toJson()  {

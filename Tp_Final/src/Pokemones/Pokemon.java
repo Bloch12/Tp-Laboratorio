@@ -151,6 +151,20 @@ public class Pokemon implements IToJson {
     }
 
     @Override
+    public String toString() {
+        return "Pokemon{" +
+                "nombreParticular='" + nombreParticular + '\'' +
+                ", nivel=" + nivel +
+                ", habilidad=" + habilidad +
+                ", movimientos=" + movimientos +
+                ", especie='" + especie + '\'' +
+                ", ivs=" + ivs +
+                ", evs=" + evs +
+                ", naturaleza=" + naturaleza +
+                '}';
+    }
+
+    @Override
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
