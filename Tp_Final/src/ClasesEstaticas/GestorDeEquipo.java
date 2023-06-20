@@ -31,9 +31,9 @@ public class GestorDeEquipo implements IToJson {
 
     public static void modificarEquipo(String nombre, Equipo equipo) throws ValorNoValidoExeption
     {
-        Iterator it=listaDeEquipos.iterator();
+        Iterator it= listaDeEquipos.iterator();
         while (it.hasNext()) {
-            Equipo aux= (Equipo) it;
+            Equipo aux = (Equipo) it.next();
             if (aux.getNombre().equalsIgnoreCase(nombre))
                 throw new ValorNoValidoExeption("Ya existe un equipo con este nombre");
         }
@@ -62,8 +62,15 @@ public class GestorDeEquipo implements IToJson {
 
     }
 
-    public static String listarEquipo(){
-        return GestorDeColecciones.CollecionAString(listaDeEquipos);
+    public static ArrayList listarEquipo(){
+        Iterator it = listaDeEquipos.iterator();
+        ArrayList<String> aux = new ArrayList<>();
+        while (it.hasNext()){
+            Equipo eqAux = (Equipo) it.next();
+            if(eqAux.isEstado())
+                aux.add(eqAux.getNombre());
+        }
+        return aux;
     }
 
     @Override

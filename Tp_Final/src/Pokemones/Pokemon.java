@@ -64,6 +64,7 @@ public class Pokemon implements IToJson {
     public String getNombreParticular() {
         return nombreParticular;
     }
+    public String getEspecie(){return especie;}
 
     public String listarMovimientos(){return GestorDeColecciones.CollecionAString(movimientos);}
 
