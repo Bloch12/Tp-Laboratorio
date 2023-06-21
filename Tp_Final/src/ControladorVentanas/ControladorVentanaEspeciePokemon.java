@@ -21,7 +21,11 @@ public class ControladorVentanaEspeciePokemon implements ActionListener {
 		}
 		return instance;
 	}
-	
+
+	/**
+	 * el boton volver vuelve a la ventana pokedex
+	 * @param e the event to be processed
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

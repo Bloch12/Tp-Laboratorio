@@ -26,7 +26,11 @@ public class ControladorVentanaEquipos implements ActionListener{
 			}
 			return instance;
 		}
-		
+
+	/**
+	 * el boton buscar te busca un equipo ya creado,el crear te intenta crear un equipo y el volver vuelve al menu principal
+	 * @param e the event to be processed
+	 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub

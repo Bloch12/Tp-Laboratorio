@@ -29,6 +29,10 @@ public class ControladorVentanaMovimiento implements ActionListener {
         return instance;
     }
 
+    /**
+     * el boton eliminar elimina el movimiento y te debuelve a la ventana pokemon y volver te debuelve a la ventana pokemon
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub

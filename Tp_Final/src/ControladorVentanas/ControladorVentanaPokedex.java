@@ -23,7 +23,11 @@ public class ControladorVentanaPokedex implements ActionListener{
 		}
 		return instance;
 	}
-	
+
+	/**
+	 * el boton buscar busca los datos del pokemon y si existe te los muestra en la ventana especie pokemon y el boton volver te devuelve al menu principal
+	 * @param e the event to be processed
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

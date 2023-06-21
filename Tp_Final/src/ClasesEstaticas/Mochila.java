@@ -12,6 +12,10 @@ import java.util.Iterator;
 
 public class Mochila {
     private static AlmacenamientoDeDatos<Objeto> mochila = new AlmacenamientoDeDatos<>();
+
+    /**
+     * Carga todos los objetos de un archivo binario
+     */
     public static void cargar(){
         ArrayList<ObjetoEvolutivo> aux = GestorDeArchivosObjetos.leer("ObjetosEvolutivos.dat");
         for (ObjetoEvolutivo o: aux) {
@@ -23,6 +27,12 @@ public class Mochila {
         }
     }
 
+    /**
+     * Devuelve el objeto guardado con la clave key, lanza una exeption si este no existe
+     * @param key
+     * @return el objeto
+     * @throws ValorNoValidoExeption
+     */
 
     public static Objeto getObjeto(String key) throws ValorNoValidoExeption{
         if(tieneObjeto(key)){
@@ -30,6 +40,12 @@ public class Mochila {
         }
         throw new ValorNoValidoExeption("Objeto No Encontrado");
     }
+
+    /**
+     * Consulta si existe el objeto
+     * @param key
+     * @return true/false dependiendo si existe o no
+     */
 
     public static boolean tieneObjeto(String key){
         return mochila.contienteClave(key);

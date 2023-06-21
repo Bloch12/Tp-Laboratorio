@@ -19,7 +19,11 @@ public class ControladorVentanaPrincipal implements ActionListener {
 		}
 		return instance;
 	}
-	
+
+	/**
+	 * el boton pokedex te lleva el menu de la pokedex, el de equipos al de equipos y el de mochila al de mochila.
+	 * @param e the event to be processed
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

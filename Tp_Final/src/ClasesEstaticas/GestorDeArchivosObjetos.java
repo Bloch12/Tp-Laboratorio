@@ -4,6 +4,12 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class GestorDeArchivosObjetos {
+    /**
+     * Carga un arreglo de un objeto serializable en un archivo de nombre dado
+     * @param objetos
+     * @param nombreArchivo
+     * @param <T>
+     */
     public static <T extends Serializable> void  grabar(ArrayList<T> objetos,String nombreArchivo) {
         FileOutputStream fileOutputStream = null;
         ObjectOutputStream objectOutputStream = null;
@@ -33,6 +39,13 @@ public class GestorDeArchivosObjetos {
             }
         }
     }
+
+    /**
+     * Devuelve un arreglo de un objeto serializable extraido de un archivo
+     * @param nombreArchvo
+     * @return
+     * @param <T>
+     */
 
     public static <T extends Serializable> ArrayList<T> leer(String nombreArchvo)
     {

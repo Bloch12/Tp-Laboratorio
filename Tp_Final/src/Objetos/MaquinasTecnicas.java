@@ -18,6 +18,12 @@ public class MaquinasTecnicas extends Objeto{
         return super.toString() + " " + movimiento;
     }
 
+    /**
+     * Agrega un movimiento al pokemon indicado
+     * @param equipo
+     * @param pokemon
+     * @return
+     */
     @Override
     public String usar(Equipo equipo, int pokemon) {
         try {

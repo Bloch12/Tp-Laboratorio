@@ -44,7 +44,6 @@ public class Pokedex{
      * @param nombre pokemon a buscar
      * @return Si lo encuentra String con toda la informacion del pokemon, Si no lo encentra "Pokemon No Encontrado"
      * @see EspeciePokemon#toString
-     * @throws NullPointerException
      */
     public static EspeciePokemon buscarPokemon(String nombre){
         EspeciePokemon aux = pokemones.buscar(nombre);

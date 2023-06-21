@@ -31,6 +31,11 @@ public class ControladorVentanaCrearMovimiento implements ActionListener {
         return instance;
     }
 
+    /**
+     * EL boton buscar busca e intenta crear el movimiento el boton volver vueleve a la pantalla del pokemon
+     * @param e the event to be processed
+     */
+
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub

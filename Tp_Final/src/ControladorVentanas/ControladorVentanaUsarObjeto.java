@@ -29,6 +29,10 @@ public class ControladorVentanaUsarObjeto implements ActionListener {
         return instance;
     }
 
+    /**
+     * Seleccionar seleciona un equipo y te muestra sus pokemons, usar usa el objeto en el pokemon elegido, volver vuelve al menu principal
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub

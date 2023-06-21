@@ -36,7 +36,11 @@ public class ControladorVentanaEditorEquipo implements ActionListener {
 		}
 		return instance;
 	}
-	
+
+	/**
+	 * El boton guardar cambios gaurda los cambios efectuados, el agregar te manda a la ventana para crear un nuevo pokemon, el de pokemon te muestra los datos del pokemon seleccionado y el de vololver te vuelve a la ventana para buscar equipos
+	 * @param e the event to be processed
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

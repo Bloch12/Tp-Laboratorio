@@ -32,6 +32,11 @@ public class ControladorVentanaCrearPokemon implements ActionListener {
         return instance;
     }
 
+    /**
+     * EL boton crear intenta crar un pokemon y el Volver vuelve a la ventana de Equipo
+     * @param e the event to be processed
+     */
+
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub

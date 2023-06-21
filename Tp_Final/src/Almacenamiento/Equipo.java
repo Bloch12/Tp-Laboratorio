@@ -66,6 +66,12 @@ public class Equipo implements IToJson {
         else
             throw new ValorNoValidoExeption("El pokemon no existe");
     }
+
+    /**
+     * Elimina el pokemon en la posicion indicada del equipo, si esta no existe lanza una exepcion.
+     * @param posicion
+     * @throws ValorNoValidoExeption
+     */
     public void quitarPokemon(int posicion) throws ValorNoValidoExeption
     {
         if(pokemones.size() > posicion)
@@ -81,6 +87,10 @@ public class Equipo implements IToJson {
             throw new ValorNoValidoExeption("posicion invalida");
     }
 
+    /**
+     *
+     * @return devuelve un arreglo con la pocision de los pokemones del equipo
+     */
     public ArrayList<Integer> listarPokemones(){
         ArrayList<Integer> arr = new ArrayList<>();
         for(int i = 0; i<pokemones.size();i++){

@@ -13,12 +13,23 @@ public class GestorDeEquipo{
 
     private static LinkedHashSet<Equipo> listaDeEquipos= new LinkedHashSet<>();
 
+    /**
+     * Crea un equipo, si este ya existe lanza una exeption
+     * @param nombreEquipo
+     * @throws ValorNoValidoExeption
+     */
+
     public static void crearEquipo(String nombreEquipo) throws ValorNoValidoExeption
     {
         Equipo aux= new Equipo(nombreEquipo);
         if(!listaDeEquipos.add(aux))
             throw new ValorNoValidoExeption("El equipo " + nombreEquipo + " ya existe");
     }
+
+    /**
+     * Cambia el estado de un equipo
+     * @param equipo
+     */
 
     public static void cambiarEstadoEquipo(Equipo equipo)
     {
@@ -28,7 +39,12 @@ public class GestorDeEquipo{
             equipo.setEstado(false);
     }
 
-
+    /**
+     * Modifica el nombre de un equipo, lanza una exeption si el nombre ya existe.
+     * @param nombre
+     * @param equipo
+     * @throws ValorNoValidoExeption
+     */
     public static void modificarEquipo(String nombre, Equipo equipo) throws ValorNoValidoExeption
     {
         Iterator it= listaDeEquipos.iterator();
@@ -40,6 +56,13 @@ public class GestorDeEquipo{
         equipo.setNombre(nombre);
     }
 
+    /**
+     * Devuelve un equipo en la posicion pos
+     * @param pos
+     * @return
+     * @throws ValorNoValidoExeption
+     */
+
     public static Equipo getEquipo(int pos) throws ValorNoValidoExeption{
        if(listaDeEquipos.size()>pos){
             Equipo[] a = new Equipo[listaDeEquipos.size()];
@@ -49,6 +72,13 @@ public class GestorDeEquipo{
         else
             throw new ValorNoValidoExeption("Posicion no valida");
     }
+
+    /**
+     * Devuelve un equipo con el nombre pasado
+     * @param nombre
+     * @return
+     * @throws ValorNoValidoExeption
+     */
 
     public static Equipo getEquipo(String nombre) throws ValorNoValidoExeption{
 
@@ -63,6 +93,11 @@ public class GestorDeEquipo{
 
     }
 
+    /**
+     * Devuelve un Arraylist con el nombre de cada equipo en sus posciciones
+     * @return Arraylist
+     */
+
     public static ArrayList listarEquipo(){
         Iterator it = listaDeEquipos.iterator();
         ArrayList<String> aux = new ArrayList<>();
@@ -74,6 +109,9 @@ public class GestorDeEquipo{
         return aux;
     }
 
+    /**
+     * Sube todos los equipos a un archivo Json
+     */
 
     public static void subir() {
         JSONObject jsonObject= new JSONObject();
@@ -93,6 +131,10 @@ public class GestorDeEquipo{
         JsonUtiles.grabar(jsonObject,"equipos");
 
     }
+
+    /**
+     * Baja todos los equipos de un archivo Json
+     */
 
     public static void bajar() {
         JSONObject jsonObject;

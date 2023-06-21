@@ -196,6 +196,11 @@ public class EspeciePokemon implements ICargable {
         }
     }
 
+    /**
+     * Carga la evolution chain, se llama a si misma para cargar la siguiente etapa
+     * @param chain
+     * @param etapa
+     */
     private void cargar(JSONObject chain, int etapa){
         JSONObject jsonObject;
         JSONObject aux;
@@ -239,6 +244,7 @@ public class EspeciePokemon implements ICargable {
 
     }
 
+
     @Override
     public String toString() {
         if(numPokedex==0){
@@ -259,6 +265,12 @@ public class EspeciePokemon implements ICargable {
                 "Cadena:" + GestorDeColecciones.CollecionAString(cadenaEvolutiva);
     }
 
+    /**
+     * Busca una habilidad lanza una exeption si esta no se encuentra
+     * @param habilidad
+     * @return
+     * @throws HabilidadNoPermitidaExeption
+     */
     public Habilidad buscarHabilidad(String habilidad) throws HabilidadNoPermitidaExeption{
         int i = 0;
         Habilidad aux;
@@ -276,6 +288,13 @@ public class EspeciePokemon implements ICargable {
         return habilidades;
     }
     public Habilidad getHabilidad(int pos){return habilidades.get(pos);}
+
+    /**
+     * Busca un movimiento lanza una exeption si este no se encuentra
+     * @param movimiento
+     * @return
+     * @throws HabilidadNoPermitidaExeption
+     */
 
     public Movimiento buscarMovimiento(String movimiento) throws MovimientoNoPermitidoExeption{
         if(movimientos.contienteClave(movimiento)){

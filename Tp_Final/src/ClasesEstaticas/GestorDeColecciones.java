@@ -10,6 +10,12 @@ public class GestorDeColecciones {
     public GestorDeColecciones() {
     }
 
+    /**
+     * Suma los datos de un arreglo
+     * @param arr
+     * @return
+     * @param <T>
+     */
     public static <T extends Number> double sumarDatosColeccion(ArrayList<T> arr) {
         double rta = 0;
         for (T t : arr) {
@@ -17,6 +23,13 @@ public class GestorDeColecciones {
         }
         return rta;
     }
+
+    /**
+     * Suma los datos de un set
+     * @param set
+     * @return
+     * @param <T>
+     */
 
    public static <T extends Number> double sumarDatosColeccion(HashSet<T> set) {
         double rta = 0;
@@ -40,6 +53,12 @@ public class GestorDeColecciones {
         }
         return rta;
     }
+
+    /**
+     * se le pasa un set y lo lista
+     * @param set
+     * @return el listado
+     */
 
     public static String CollecionAString(LinkedHashSet set) {
         String rta = "";

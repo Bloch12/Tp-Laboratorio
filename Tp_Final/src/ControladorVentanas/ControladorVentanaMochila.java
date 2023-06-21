@@ -26,6 +26,11 @@ public class ControladorVentanaMochila implements ActionListener {
         return instance;
     }
 
+    /**
+     * Buscar intenta buscar el objeto y te manda a la ventana para usarlo y volver te debuelve al menu principal
+     * @param e the event to be processed
+     */
+
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub

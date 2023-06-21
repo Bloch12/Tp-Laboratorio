@@ -82,6 +82,12 @@ public class Pokemon implements IToJson {
         return movimientos.get(pos);
     }
 
+    /**
+     * Setea el nivel lanza una exepcion si ingresa un valor no permitido
+     * @param nivel
+     * @throws ValorNoValidoExeption
+     */
+
     public void setNivel(Integer nivel) throws ValorNoValidoExeption {
         if(nivel > 0 && nivel <= 100){
             this.nivel = nivel;
@@ -95,6 +101,12 @@ public class Pokemon implements IToJson {
         return habilidad;
     }
 
+    /**
+     * Setea la habilidad lanza una exepcion si ingresa un valor no permitido
+     * @param habilidad
+     * @throws HabilidadNoPermitidaExeption
+     */
+
     public void setHabilidad(String habilidad) throws HabilidadNoPermitidaExeption{
        this.habilidad = getDatosEspecie().buscarHabilidad(habilidad);
     }
@@ -102,6 +114,13 @@ public class Pokemon implements IToJson {
     private EspeciePokemon getDatosEspecie(){
         return Pokedex.buscarPokemon(especie);
     }
+
+    /**
+     * Agrega un movimientos lanza una exepcion si este no existe o si se exede el maximo.
+     * @param movimiento
+     * @throws MaximaCantidadDeMovimientosSobrepasadaExeption
+     * @throws MovimientoNoPermitidoExeption
+     */
 
     public void setMovimientos(String movimiento) throws MaximaCantidadDeMovimientosSobrepasadaExeption,MovimientoNoPermitidoExeption {
           Movimiento aux = getDatosEspecie().buscarMovimiento(movimiento);
@@ -120,6 +139,12 @@ public class Pokemon implements IToJson {
     public void setIvs(ArrayList<Integer> ivs){
             this.ivs = ivs;
     }
+
+    /**
+     * Setea los evs lanza una exeption si la suma de todos supera 508
+     * @param evs
+     * @throws ValorNoValidoExeption
+     */
 
     public void setEvs(ArrayList<Integer> evs) throws ValorNoValidoExeption {
         if(GestorDeColecciones.sumarDatosColeccion(evs) > 508){
@@ -143,12 +168,16 @@ public class Pokemon implements IToJson {
     }
 
 
-
-
     public void setNaturaleza(Naturaleza naturaleza) {
         this.naturaleza = naturaleza;
     }
 
+
+    /**
+     * Elimina el movimiento en la posicion indicada si esta no existe lanza una exepcion
+     * @param pos
+     * @throws ValorNoValidoExeption
+     */
     public void eliminarMovimiento(int pos) throws ValorNoValidoExeption {
         if(pos < movimientos.size())
         {
@@ -157,10 +186,6 @@ public class Pokemon implements IToJson {
         else {
             throw new ValorNoValidoExeption("El valor debe estar entre 0 y "+(movimientos.size()-1));
         }
-    }
-
-    public void evolucionar(){
-        //a implementar
     }
 
     @Override

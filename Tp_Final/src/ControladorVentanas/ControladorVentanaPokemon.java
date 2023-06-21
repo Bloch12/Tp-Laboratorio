@@ -40,6 +40,10 @@ public class ControladorVentanaPokemon implements ActionListener {
     }
 
 
+    /**
+     * El boton Guardar guarda los cambios eliminados, el boton volvert vuelve a la ventana del equipo, el boton eliminar elimina el pokemon, el boton crear crea nuevos movimientos y los botones de los movimientos te muestran mas informacion de estos
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
