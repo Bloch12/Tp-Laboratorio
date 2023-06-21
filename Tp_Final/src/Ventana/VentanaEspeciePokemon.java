@@ -72,7 +72,7 @@ public class VentanaEspeciePokemon extends JFrame {
 		txtrDatos.setBounds(10, 11, 749, 764);
 		contentPane.add(txtrDatos);
 		lblImagen = new JLabel();
-		lblImagen.setBounds(769, 11, 158, 130);
+		lblImagen.setBounds(769, 11, 250, 250);
 		contentPane.add(lblImagen);
 		
 	}
@@ -92,7 +92,7 @@ public class VentanaEspeciePokemon extends JFrame {
 			e.printStackTrace();
 		}
 		lblImagen.removeAll();
-		lblImagen.setIcon(new ImageIcon(imagen));
+		lblImagen.setIcon(new ImageIcon(imagen.getScaledInstance(250, 250, Image.SCALE_SMOOTH)));
 		
 		
 	}

@@ -1,15 +1,6 @@
 package Almacenamiento;
 
-import ClasesEstaticas.ConsumeApi;
-import Pokemones.EspeciePokemon;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class AlmacenamientoDeDatos <T> {
     private LinkedHashMap<String,T> datos;

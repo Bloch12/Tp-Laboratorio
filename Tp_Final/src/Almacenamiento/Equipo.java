@@ -26,7 +26,6 @@ public class Equipo implements IToJson {
         pokemones = new ArrayList<>();
         estado = true;
     }
-
     public Equipo() {
         nombre="";
         pokemones = new ArrayList<>();
@@ -49,6 +48,12 @@ public class Equipo implements IToJson {
         this.estado = estado;
     }
 
+    /**
+     * Intenta agregar un pokemon al equipo, si ya hay 6 pokemnones o el pokemon no existe lanza una exeption
+     * @param pokemon
+     * @throws EquipoLlenoExeption
+     * @throws ValorNoValidoExeption
+     */
     public void agregarPokemon(Pokemon pokemon) throws EquipoLlenoExeption, ValorNoValidoExeption
     {
         if(Pokedex.existePokemon(pokemon.getNombreParticular())) {

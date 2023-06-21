@@ -248,7 +248,6 @@ public class EspeciePokemon implements ICargable {
                 "Numero en la Pokedex:" + numPokedex + "\n" +
                 "Especie: " + especie + "\n" +
                 "Habilidades:\n" + GestorDeColecciones.CollecionAString(habilidades)  + "\n" +
-                "Sprite:" + sprite +  "\n" +
                 "Tipos:\n" + GestorDeColecciones.CollecionAString(tipos) + "\n" +
                 "Estadisticas:\n" + GestorDeColecciones.CollecionAString(estadisticas) + "\n" +
                 "Peso: " + peso + "\n" +
@@ -256,7 +255,7 @@ public class EspeciePokemon implements ICargable {
                 "Radio De Captura:" + radioDeCaptura + "\n" +
                 "Color:" + color + "\n" +
                 "Grupos Huevo:\n" + GestorDeColecciones.CollecionAString(gruposHuevo) + "\n" +
-                "descripcion:" + descripcion + "\n\n\n" +
+                "Descripcion:" + descripcion + "\n\n\n" +
                 "Cadena:" + GestorDeColecciones.CollecionAString(cadenaEvolutiva);
     }
 

@@ -114,17 +114,25 @@ public class Evolucion  {
 
     @Override
     public String toString() {
-        return "Evolucion{" +
-                "etapa=" + etapa +
-                ", especie='" + especie + '\'' +
-                ", trigger='" + trigger + '\'' +
-                ", minNivel=" + minNivel +
-                ", minFel=" + minFel +
-                ", bellezaMinima=" + bellezaMinima +
-                ", objeto='" + objeto + '\'' +
-                ", objetoEquipado='" + objetoEquipado + '\'' +
-                ", horario='" + horario + '\'' +
-                '}';
+        String rta = "";
+        rta += especie + " | ";
+        if(!trigger.equals("")){
+            rta+= "Trigger: " + trigger;
+        }
+        if(minNivel != 0){
+            rta += " | " + "Minimo Nivel: " + minNivel;
+        }if(minFel != 0){
+            rta += " | " + "Felicidad Minima: " + minFel;
+        }if(bellezaMinima != 0){
+            rta += " | " + "Belleza Minima: " + bellezaMinima;
+        }if(!objeto.equals("")){
+            rta += "| Objeto: " + objeto;
+        }if(!objetoEquipado.equals("")){
+            rta += " | Objeto Equipado: " + objetoEquipado;
+        }if(!horario.equals("")){
+            rta += "| Horario: " + horario;
+        }
+        return rta;
     }
 
 }

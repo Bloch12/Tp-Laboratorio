@@ -37,6 +37,7 @@ public class ControladorVentanaEquipos implements ActionListener{
 						aux = ControladorVentanaEditorEquipo.getInstance(GestorDeEquipo.getEquipo((String) ventana.getSelectorDeEquipo().getSelectedItem() ));
 						aux.setDatos();
 						aux.setVentana(true);
+						setVentana(false);
 				}catch (ValorNoValidoExeption ex) {
 					JOptionPane.showMessageDialog(null, ex.getMessage());
 				}
