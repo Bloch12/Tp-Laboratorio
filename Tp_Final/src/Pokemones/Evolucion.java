@@ -1,5 +1,7 @@
 package Pokemones;
 
+import Poderes.Habilidad;
+
 public class Evolucion  {
     private int etapa;
     private String especie;
@@ -104,6 +106,7 @@ public class Evolucion  {
     public String getHorario() {
         return horario;
     }
+
 
     public void setHorario(String horario) {
         this.horario = horario;

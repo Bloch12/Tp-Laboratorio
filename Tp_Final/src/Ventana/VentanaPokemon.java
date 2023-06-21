@@ -72,6 +72,7 @@ public class VentanaPokemon extends JFrame {
 		btns=new ArrayList<>();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 553, 589);
+		setResizable(false);
 		editorpokemon = new JPanel();
 		editorpokemon.setBorder(new EmptyBorder(5, 5, 5, 5));
 

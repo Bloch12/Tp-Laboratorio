@@ -40,6 +40,7 @@ public class ControladorVentanaCrearPokemon implements ActionListener {
             try {
                 Pokemon p = new Pokemon(ventana.getTextField());
                 equipo.agregarPokemon(p);
+                GestorDeEquipo.subir();
                 ControladorVentanaEditorEquipo aux;
                 aux = ControladorVentanaEditorEquipo.getInstance();
                 aux.setDatos();

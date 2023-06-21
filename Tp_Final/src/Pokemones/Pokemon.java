@@ -31,7 +31,7 @@ public class Pokemon implements IToJson {
         this.nombreParticular = especie;
         this.nivel = 100;
         this.especie = especie;
-        this.habilidad = null;
+        this.habilidad = getDatosEspecie().getHabilidad(0);
         movimientos = new ArrayList<>();
         this.evs = new ArrayList<>();
         for(int i=0; i<6;i++){
@@ -107,6 +107,7 @@ public class Pokemon implements IToJson {
           Movimiento aux = getDatosEspecie().buscarMovimiento(movimiento);
           if(movimientos.size() < 4){
               if(!movimientos.contains(aux)){
+                  aux.cargar();
                   movimientos.add(aux);
               }else{
                 throw new MovimientoNoPermitidoExeption(nombreParticular,movimiento + " porque ya lo conoce");
@@ -189,11 +190,13 @@ public class Pokemon implements IToJson {
                 jsonArray.put(movimientos.get(i).toJson());
             }
             jsonObject.put("movimientos",jsonArray);
+            jsonArray = new JSONArray();
             for (int i = 0; i < ivs.size(); i++)
             {
                 jsonArray.put(ivs.get(i));
             }
             jsonObject.put("ivs",jsonArray);
+            jsonArray = new JSONArray();
             for (int i = 0; i < evs.size(); i++)
             {
                 jsonArray.put(evs.get(i));
@@ -225,12 +228,12 @@ public class Pokemon implements IToJson {
             jsonArray = jsonObject.getJSONArray("ivs");
             for (int i = 0; i < jsonArray.length(); i++)
             {
-                ivs.add(jsonArray.getInt(i));
+                ivs.set(i,jsonArray.getInt(i));
             }
             jsonArray = jsonObject.getJSONArray("evs");
             for (int i = 0; i < jsonArray.length(); i++)
             {
-                evs.add(jsonArray.getInt(i));
+                evs.set(i,jsonArray.getInt(i));
             }
             Habilidad aux = new Habilidad();
             aux.toObject(jsonObject.getJSONObject("habilidad"));
@@ -239,6 +242,7 @@ public class Pokemon implements IToJson {
         }
         catch (JSONException e)
         {
+            System.out.println(e.toString() + jsonArray.length());
         }
     }
 }

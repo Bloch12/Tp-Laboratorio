@@ -1,6 +1,7 @@
 package ControladorVentanas;
 
 import Almacenamiento.Equipo;
+import ClasesEstaticas.GestorDeEquipo;
 import Exepciones.EquipoLlenoExeption;
 import Exepciones.MaximaCantidadDeMovimientosSobrepasadaExeption;
 import Exepciones.MovimientoNoPermitidoExeption;
@@ -41,6 +42,7 @@ public class ControladorVentanaCrearMovimiento implements ActionListener {
                 aux.setDatos();
                 aux.setVentana(true);
                 setVentana(false);
+                GestorDeEquipo.subir();
             }catch (MovimientoNoPermitidoExeption ex){
                 JOptionPane.showMessageDialog(null,ex.getMessage());
             }catch (MaximaCantidadDeMovimientosSobrepasadaExeption ex){
@@ -51,8 +53,8 @@ public class ControladorVentanaCrearMovimiento implements ActionListener {
         if(comando.equalsIgnoreCase("Volver")) {
             ControladorVentanaPokemon aux;
             aux = ControladorVentanaPokemon.getInstance();
-            aux.setDatos();
             aux.setVentana(true);
+            setVentana(false);
         }
     }
 

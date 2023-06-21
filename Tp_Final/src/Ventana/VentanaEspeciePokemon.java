@@ -61,6 +61,7 @@ public class VentanaEspeciePokemon extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setResizable(false);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(10, 790, 89, 23);

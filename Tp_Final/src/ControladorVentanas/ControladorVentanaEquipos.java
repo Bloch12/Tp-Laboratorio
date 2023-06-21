@@ -44,6 +44,7 @@ public class ControladorVentanaEquipos implements ActionListener{
 				  try {
                       GestorDeEquipo.crearEquipo(ventana.getTextField());
 					  ControladorVentanaEditorEquipo aux = ControladorVentanaEditorEquipo.getInstance(GestorDeEquipo.getEquipo(ventana.getTextField()));
+					  GestorDeEquipo.subir();
 					  aux.setDatos();
 					  aux.setVentana(true);
 					  setVentana(false);

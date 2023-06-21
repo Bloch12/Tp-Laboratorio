@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import java.util.*;
 
-public class GestorDeEquipo implements IToJson {
+public class GestorDeEquipo{
 
     private static LinkedHashSet<Equipo> listaDeEquipos= new LinkedHashSet<>();
 
@@ -73,32 +73,31 @@ public class GestorDeEquipo implements IToJson {
         return aux;
     }
 
-    @Override
-    public JSONObject toJson() {
+
+    public static void subir() {
         JSONObject jsonObject= new JSONObject();
         JSONArray jsonArray= new JSONArray();
         try {
             Iterator it = listaDeEquipos.iterator();
             while (it.hasNext()) {
-                Equipo aux = (Equipo) it;
+                Equipo aux = (Equipo) it.next();
                 JSONObject jsonObject1=aux.toJson();
                 jsonArray.put(jsonObject1);
-                it.next();
             }
             jsonObject.put("equipos",jsonArray);
         }
         catch (JSONException e)
         {
-
         }
-        return jsonObject;
+        JsonUtiles.grabar(jsonObject,"equipos");
+
     }
 
-    @Override
-    public void toObject(JSONObject jsonObject) {
+    public static void bajar() {
+        JSONObject jsonObject;
         try {
-
-            JSONArray jsonArray=jsonObject.getJSONArray("equipos");
+            jsonObject = new JSONObject(JsonUtiles.leer("equipos"));
+            JSONArray jsonArray= jsonObject.getJSONArray("equipos");
             for (int i = 0; i < jsonArray.length() ; i++) {
                 Equipo aux= new Equipo();
                 aux.toObject(jsonArray.getJSONObject(i));

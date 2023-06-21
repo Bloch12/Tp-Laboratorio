@@ -1,7 +1,10 @@
 package ControladorVentanas;
+import ClasesEstaticas.GestorDeEquipo;
 import ClasesEstaticas.Pokedex;
 import Exepciones.HabilidadNoPermitidaExeption;
+import Exepciones.MovimientoNoPermitidoExeption;
 import Exepciones.ValorNoValidoExeption;
+import Poderes.Movimiento;
 import Pokemones.EspeciePokemon;
 import Ventana.VentanaPokemon;
 import java.awt.event.ActionEvent;
@@ -14,6 +17,7 @@ public class ControladorVentanaPokemon implements ActionListener {
     private VentanaPokemon ventana;
     private static ControladorVentanaPokemon instance = null;
     private static Pokemon pokemon;
+    private int pos;
 
     private ControladorVentanaPokemon(){
         this.ventana = new VentanaPokemon();
@@ -56,6 +60,7 @@ public class ControladorVentanaPokemon implements ActionListener {
             }catch (NullPointerException ex){
                 JOptionPane.showMessageDialog(null,"Por favor seleccione una habilidad");
             }
+            GestorDeEquipo.subir();
         }
         if(comando.equalsIgnoreCase("Eliminar")){
             ControladorVentanaEditorEquipo aux = ControladorVentanaEditorEquipo.getInstance();
@@ -63,18 +68,31 @@ public class ControladorVentanaPokemon implements ActionListener {
             aux.setDatos();
             aux.setVentana(true);
             setVentana(false);
-        }
-        if(comando.equalsIgnoreCase("Volver")) {
+            GestorDeEquipo.subir();
+        }else if(comando.equalsIgnoreCase("Volver")) {
             ControladorVentanaEditorEquipo aux = ControladorVentanaEditorEquipo.getInstance();
             aux.setDatos();
             aux.setVentana(true);
             setVentana(false);
-        }
-        if(comando.equalsIgnoreCase("Crear")){
+        }else  if(comando.equalsIgnoreCase("Crear")){
             ControladorVentanaCrearMovimiento aux= ControladorVentanaCrearMovimiento.getInstance();
             aux.setVentana(true);
             setVentana(false);
+        }else{
+            int i = 0;
+            try {
+                while (!comando.equalsIgnoreCase(pokemon.getMovimiento(i).getNombre())){
+                   i++;
+                }
+                pos = i;
+                ControladorVentanaMovimiento aux = ControladorVentanaMovimiento.getInstance(pokemon.getMovimiento(pos));
+                aux.setDatos();
+                aux.setVentana(true);
+                setVentana(false);
+            }catch (ValorNoValidoExeption ex){
+            }
         }
+
 
 
     }
@@ -94,6 +112,13 @@ public class ControladorVentanaPokemon implements ActionListener {
         ventana.setNaturaleza(pokemon.getNaturaleza());
         ventana.setLblImagen(especie.getSprite());
         ventana.setMovimientos(pokemon);
+    }
+
+    public void eliminarMovimiento(){
+        try {
+           pokemon.eliminarMovimiento(pos);
+        }catch (ValorNoValidoExeption ex){
+        }
     }
 
     public Pokemon getPokemon(){return pokemon;}

@@ -75,10 +75,10 @@ public class VentanaEquipos extends JFrame {
 		contentPane.add(txtpnCrearEquipo);
 		
 		textField = new JTextField();
-		textField.setBounds(108, 132, 187, 20);
+		textField.setBounds(130, 135, 187, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		
+		setResizable(false);
 		JTextPane txtpnNombreDelEquipo = new JTextPane();
 		txtpnNombreDelEquipo.setText("Nombre Del Equipo:");
 		txtpnNombreDelEquipo.setBackground(UIManager.getColor("Button.background"));

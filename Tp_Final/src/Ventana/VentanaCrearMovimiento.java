@@ -48,7 +48,7 @@ public class VentanaCrearMovimiento extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+		setResizable(false);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
@@ -76,6 +76,7 @@ public class VentanaCrearMovimiento extends JFrame {
 	public void setActionListener(ActionListener aux){
 		actionListener = aux;
 		btnBuscar.addActionListener(actionListener);
+		btnVolver.addActionListener(actionListener);
 	}
 
 	public String getTextField(){

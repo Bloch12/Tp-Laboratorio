@@ -13,6 +13,11 @@ import javax.swing.JTextPane;
 public class VentanaMovimiento extends JFrame {
 
 	private JPanel contentPane;
+	private JButton btnVolver;
+	private JButton btnEliminar;
+	private ActionListener actionListener;
+	JTextPane textPane;
+
 
 	/**
 	 * Launch the application.
@@ -42,19 +47,28 @@ public class VentanaMovimiento extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JButton btnVolver = new JButton("Volver");
+		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(335, 227, 89, 23);
 		contentPane.add(btnVolver);
-
-		JButton btnEliminar = new JButton("Eliminar");
+		setResizable(false);
+		btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(227, 227, 89, 23);
 		contentPane.add(btnEliminar);
 
-		JTextPane textPane = new JTextPane();
+		textPane = new JTextPane();
 		textPane.setEditable(false);
 		textPane.setBounds(10, 11, 414, 205);
 		contentPane.add(textPane);
 	}
 
+	public void setActionListener(ActionListener aux) {
+		this.actionListener = aux;
+		btnEliminar.addActionListener(actionListener);
+		btnVolver.addActionListener(actionListener);
+	}
+
+	public void setTextPane(String movimiento){
+		textPane.setText(movimiento);
+	}
 }
 

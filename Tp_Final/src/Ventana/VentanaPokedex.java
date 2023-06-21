@@ -50,6 +50,7 @@ public class VentanaPokedex extends JFrame{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setResizable(false);
 		textField = new JTextField();
 		textField.setBounds(10, 37, 282, 20);
 		contentPane.add(textField);

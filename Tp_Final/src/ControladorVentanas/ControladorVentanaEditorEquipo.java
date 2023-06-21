@@ -46,6 +46,7 @@ public class ControladorVentanaEditorEquipo implements ActionListener {
 				if(!equipo.getNombre().equals(ventana.getTextField()))
 					GestorDeEquipo.modificarEquipo(ventana.getTextField(),equipo);
 				equipo.setEstado(ventana.getrtbdHabilitado());
+				GestorDeEquipo.subir();
 				JOptionPane.showMessageDialog(null,"Cambios Guardados");
 			} catch (ValorNoValidoExeption ex) {
 				JOptionPane.showMessageDialog(null,ex.getMessage());

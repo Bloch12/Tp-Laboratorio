@@ -77,7 +77,7 @@ public class VentanaEditorEquipo extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(240, 240, 240));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+		setResizable(false);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
