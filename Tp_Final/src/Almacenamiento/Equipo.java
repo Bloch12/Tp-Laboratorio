@@ -156,7 +156,7 @@ public class Equipo implements IToJson {
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre, pokemones, estado);
+        return 1;
     }
 }
 

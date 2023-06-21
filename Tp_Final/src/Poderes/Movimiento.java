@@ -8,6 +8,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 public class Movimiento extends Poder implements ICargable {
     private Tipo tipo;
     private TipoDeDaño tipoDeDaño;
@@ -96,10 +98,29 @@ public class Movimiento extends Poder implements ICargable {
         try {
             tipo = Tipo.valueOf(jsonObject.getString("tipo"));
             tipoDeDaño = TipoDeDaño.valueOf(jsonObject.getString("tipoDeDaño"));
-            descripcion =  jsonObject.getString("descripcion");
-            pp =  jsonObject.getInt("pp");
-            precision =  jsonObject.getInt("precision");
-        }catch (JSONException e){
+            descripcion = jsonObject.getString("descripcion");
+            pp = jsonObject.getInt("pp");
+            precision = jsonObject.getInt("precision");
+        } catch (JSONException e) {
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o != null && o instanceof Movimiento){
+            Movimiento aux = (Movimiento) o;
+            return getNombre().equals(aux.getNombre());
+        }else{
+            return false;
+        }
+
+    }
+
+    @Override
+    public int hashCode() {
+        return 1;
+    }
+
 }
+
+

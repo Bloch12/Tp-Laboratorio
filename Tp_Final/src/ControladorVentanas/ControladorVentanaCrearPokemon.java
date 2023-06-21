@@ -52,9 +52,11 @@ public class ControladorVentanaCrearPokemon implements ActionListener {
                 aux.setVentana(true);
             }catch (EquipoLlenoExeption ex){
                 JOptionPane.showMessageDialog(null, "Equipo LLeno");
-            }catch (ValorNoValidoExeption ex){
+            }catch (NullPointerException ex){
                 JOptionPane.showMessageDialog(null,"El pokemon no existe");
-            }
+            }catch (ValorNoValidoExeption ex){
+            JOptionPane.showMessageDialog(null,"El pokemon no existe");
+        }
         }
         if(comando.equalsIgnoreCase("Volver")) {
             ControladorVentanaEditorEquipo aux;
