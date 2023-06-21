@@ -76,6 +76,12 @@ public class Pokemon implements IToJson {
         return nivel;
     }
 
+    public Movimiento getMovimiento(int pos)throws ValorNoValidoExeption{
+        if(pos>=movimientos.size())
+            throw new ValorNoValidoExeption("");
+        return movimientos.get(pos);
+    }
+
     public void setNivel(Integer nivel) throws ValorNoValidoExeption {
         if(nivel > 0 && nivel <= 100){
             this.nivel = nivel;

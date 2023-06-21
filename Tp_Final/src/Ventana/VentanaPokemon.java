@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 import Enums.Naturaleza;
+import Exepciones.ValorNoValidoExeption;
 import Poderes.Habilidad;
+import Pokemones.Pokemon;
+
 public class VentanaPokemon extends JFrame {
 	private ActionListener actionListener;
 	private JLabel lblImagen;
@@ -43,6 +46,9 @@ public class VentanaPokemon extends JFrame {
 	private JSpinner ivsEspAtq;
 	private JSpinner ivsEspDeff;
 	private JSpinner ivsVel;
+
+	private ArrayList<JButton> btns;
+
 	/**
 	 * Launch the application.
 	 */
@@ -63,6 +69,7 @@ public class VentanaPokemon extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaPokemon() {
+		btns=new ArrayList<>();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 553, 589);
 		editorpokemon = new JPanel();
@@ -209,6 +216,11 @@ public class VentanaPokemon extends JFrame {
 		btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(336, 516, 96, 23);
 		editorpokemon.add(btnEliminar);
+
+		btns.add(btnMovimiento1);
+		btns.add(btnMovimiento2);
+		btns.add(btnMovimiento3);
+		btns.add(btnMovimiento4);
 	}
 
 	public void setActionListener(ActionListener aux){
@@ -259,6 +271,7 @@ public class VentanaPokemon extends JFrame {
 	public String getHabilidad() {
 		return (String) comboBox.getSelectedItem();
 	}
+
 
 	public void setNivel(int nivel){
 		this.nivel.setValue(nivel);
@@ -321,6 +334,24 @@ public class VentanaPokemon extends JFrame {
 		lblImagen.setIcon(new ImageIcon(imagen));
 
 
+	}
+
+	public void setMovimientos(Pokemon p){
+		int i=0;
+		for (JButton btn: btns)
+			btn.setVisible(true);
+		try{
+			while(true) {
+				btns.get(i).setText(p.getMovimiento(i).getNombre());
+				i++;
+			}
+		}catch (ValorNoValidoExeption ex){
+			if(i<4)
+				btns.get(i).setText("Crear");
+			for (i++; i <4 ; i++) {
+				btns.get(i).setVisible(false);
+			}
+		}
 	}
 
 

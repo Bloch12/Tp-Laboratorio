@@ -19,6 +19,8 @@ public class VentanaCrearMovimiento extends JFrame {
 	private JTextField textField;
 
 	private JButton btnBuscar;
+
+	private JButton btnVolver;
 	private ActionListener actionListener;
 
 	/**
@@ -53,6 +55,10 @@ public class VentanaCrearMovimiento extends JFrame {
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(10, 77, 89, 23);
 		contentPane.add(btnBuscar);
+
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(335, 227, 89, 23);
+		contentPane.add(btnVolver);
 
 		textField = new JTextField();
 		textField.setBounds(10, 46, 204, 20);

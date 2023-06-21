@@ -28,6 +28,14 @@ public class ControladorVentanaPokemon implements ActionListener {
         return instance;
     }
 
+    public static ControladorVentanaPokemon getInstance() {
+        if(instance == null) {
+            instance = new ControladorVentanaPokemon();
+        }
+        return instance;
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
@@ -62,6 +70,11 @@ public class ControladorVentanaPokemon implements ActionListener {
             aux.setVentana(true);
             setVentana(false);
         }
+        if(comando.equalsIgnoreCase("Crear")){
+            ControladorVentanaCrearMovimiento aux= ControladorVentanaCrearMovimiento.getInstance();
+            aux.setVentana(true);
+            setVentana(false);
+        }
 
 
     }
@@ -80,6 +93,9 @@ public class ControladorVentanaPokemon implements ActionListener {
         ventana.setIvs(pokemon.getIvs());
         ventana.setNaturaleza(pokemon.getNaturaleza());
         ventana.setLblImagen(especie.getSprite());
+        ventana.setMovimientos(pokemon);
     }
+
+    public Pokemon getPokemon(){return pokemon;}
 
 }

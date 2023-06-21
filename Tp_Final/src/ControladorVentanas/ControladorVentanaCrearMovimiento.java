@@ -2,7 +2,10 @@ package ControladorVentanas;
 
 import Almacenamiento.Equipo;
 import Exepciones.EquipoLlenoExeption;
+import Exepciones.MaximaCantidadDeMovimientosSobrepasadaExeption;
+import Exepciones.MovimientoNoPermitidoExeption;
 import Exepciones.ValorNoValidoExeption;
+import Pokemones.EspeciePokemon;
 import Pokemones.Pokemon;
 import Ventana.VentanaCrearMovimiento;
 
@@ -14,9 +17,7 @@ import java.awt.event.ActionListener;
 public class ControladorVentanaCrearMovimiento implements ActionListener {
 
     private VentanaCrearMovimiento ventana;
-    private static ControladorVentanaCrearPokemon instance = null;
-    private static Equipo equipo;
-
+    private static ControladorVentanaCrearMovimiento instance = null;
     private ControladorVentanaCrearMovimiento() {
         this.ventana = new VentanaCrearMovimiento();
         this.ventana.setActionListener(this);
@@ -33,23 +34,23 @@ public class ControladorVentanaCrearMovimiento implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         String comando = e.getActionCommand();
-        if(comando.equalsIgnoreCase("Crear")) {
+        if(comando.equalsIgnoreCase("Buscar")) {
+            ControladorVentanaPokemon aux= ControladorVentanaPokemon.getInstance();
             try {
-                Pokemon p = new Pokemon(ventana.getTextField());
-                equipo.agregarPokemon(p);
-                ControladorVentanaEditorEquipo aux;
-                aux = ControladorVentanaEditorEquipo.getInstance();
+                aux.getPokemon().setMovimientos(ventana.getTextField());
                 aux.setDatos();
                 aux.setVentana(true);
-            }catch (EquipoLlenoExeption ex){
-                JOptionPane.showMessageDialog(null, "Equipo LLeno");
-            }catch (ValorNoValidoExeption ex){
-                JOptionPane.showMessageDialog(null,"El pokemon no existe");
+                setVentana(false);
+            }catch (MovimientoNoPermitidoExeption ex){
+                JOptionPane.showMessageDialog(null,ex.getMessage());
+            }catch (MaximaCantidadDeMovimientosSobrepasadaExeption ex){
+                JOptionPane.showMessageDialog(null,ex.getMessage());
             }
+
         }
         if(comando.equalsIgnoreCase("Volver")) {
-            ControladorVentanaEditorEquipo aux;
-            aux = ControladorVentanaEditorEquipo.getInstance();
+            ControladorVentanaPokemon aux;
+            aux = ControladorVentanaPokemon.getInstance();
             aux.setDatos();
             aux.setVentana(true);
         }

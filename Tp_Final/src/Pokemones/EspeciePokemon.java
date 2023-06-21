@@ -277,7 +277,7 @@ public class EspeciePokemon implements ICargable {
         return habilidades;
     }
 
-    Movimiento buscarMovimiento(String movimiento) throws MovimientoNoPermitidoExeption{
+    public Movimiento buscarMovimiento(String movimiento) throws MovimientoNoPermitidoExeption{
         if(movimientos.contienteClave(movimiento)){
                 return movimientos.buscar(movimiento);
         }else{
