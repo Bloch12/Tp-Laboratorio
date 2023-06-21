@@ -70,7 +70,7 @@ public class Movimiento extends Poder implements ICargable {
 
     @Override
     public String toString() {
-        return  "nombre" + getNombre() + "\n" ;
+        return  "Nombre del movimiento: " + getNombre() + "\n" ;
                 /*+
                 "tipo:" + tipo.getTipo() + "\n" +
                 "tipoDeDaño: " + tipoDeDaño.getTipoDeDaño() + "\n" +

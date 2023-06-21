@@ -22,7 +22,7 @@ public class Habilidad extends Poder {
     public String toString() {
         String rta = super.toString() + " ";
         if(oculta){
-            rta = rta + "Es oculta";
+            rta = rta + " Es oculta";
         }
         return rta;
     }
