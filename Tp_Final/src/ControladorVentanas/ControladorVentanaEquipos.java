@@ -33,7 +33,7 @@ public class ControladorVentanaEquipos implements ActionListener{
 			String comando = e.getActionCommand();
 			if(comando.equalsIgnoreCase("Buscar")) {
 				try{
-					ControladorVentanaEditorEquipo aux;
+						ControladorVentanaEditorEquipo aux;
 						aux = ControladorVentanaEditorEquipo.getInstance(GestorDeEquipo.getEquipo((String) ventana.getSelectorDeEquipo().getSelectedItem() ));
 						aux.setDatos();
 						aux.setVentana(true);
@@ -46,6 +46,7 @@ public class ControladorVentanaEquipos implements ActionListener{
 					  ControladorVentanaEditorEquipo aux = ControladorVentanaEditorEquipo.getInstance(GestorDeEquipo.getEquipo(ventana.getTextField()));
 					  aux.setDatos();
 					  aux.setVentana(true);
+					  setVentana(false);
                   }catch (ValorNoValidoExeption ex) {
                       JOptionPane.showMessageDialog(null, ex.getMessage());
                   }
@@ -63,5 +64,6 @@ public class ControladorVentanaEquipos implements ActionListener{
 		public void setDatos(){
 			ventana.getSelectorDeEquipo().setModel(new DefaultComboBoxModel(GestorDeEquipo.listarEquipo().toArray()));
 		}
+
 
 }

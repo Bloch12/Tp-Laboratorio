@@ -242,11 +242,11 @@ public class Menu {
                             break;
                     }
                     System.out.println("Ingrese el nuevo valor del ev");
-                    try {
+                    /*try {
                         pokemon.setEvs(teclado.nextInt(),estadisticaEv);
                     }catch (ValorNoValidoExeption e){
                         System.out.println(e.getMessage());
-                    }
+                    }*/
                     break;
                 case 6:
                     System.out.println("ingrese la estadistica a cambiar \n1.Hp \n2.Atq \n3.Deff \n4.EspAtq \n5.EspDeff \n6.Vel");
@@ -269,11 +269,11 @@ public class Menu {
                             break;
                     }
                     System.out.println("Ingrese el nuevo valor del iv");
-                    try {
+                    /*try {
                         pokemon.setIvs(teclado.nextInt(),estadisticaIv);
                     }catch (ValorNoValidoExeption e){
                         System.out.println(e.getMessage());
-                    }
+                    }*/
                 case 7:
                     System.out.println("Ingrese la nueva naturaleza");
                     teclado.nextLine();

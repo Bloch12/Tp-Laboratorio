@@ -15,6 +15,7 @@ public class ControladorVentanaEditorEquipo implements ActionListener {
 	private VentanaEditorEquipo ventana;
 	private static ControladorVentanaEditorEquipo instance = null;
 	private static Equipo equipo;
+	private int pos;
 	
 	private ControladorVentanaEditorEquipo(){
 		this.ventana = new VentanaEditorEquipo();
@@ -26,6 +27,13 @@ public class ControladorVentanaEditorEquipo implements ActionListener {
 			instance = new ControladorVentanaEditorEquipo();
 		}
 		equipo = equipoAux;
+		return instance;
+	}
+
+	public static ControladorVentanaEditorEquipo getInstance() {
+		if(instance == null) {
+			instance = new ControladorVentanaEditorEquipo();
+		}
 		return instance;
 	}
 	
@@ -44,13 +52,31 @@ public class ControladorVentanaEditorEquipo implements ActionListener {
 			}catch (ClassCastException ex){
 				JOptionPane.showMessageDialog(null,ex.getMessage());
 			}
-		}
-		if(comando.equalsIgnoreCase("Volver")) {
+		} else if(comando.equalsIgnoreCase("Volver")) {
 			ControladorVentanaEquipos aux = ControladorVentanaEquipos.getInstance();
 			aux.setDatos();
 			aux.setVentana(true);
 			setVentana(false);
+		}else if(comando.equalsIgnoreCase("Agregar")){
+			ControladorVentanaCrearPokemon aux = ControladorVentanaCrearPokemon.getInstance(equipo);
+			aux.setVentana(true);
+			setVentana(false);
+		}else{
+			int i = 0;
+			while(i<6 && !comando.equalsIgnoreCase("pokemon " + i)) {
+				i++;
+			}
+			try {
+				pos = i;
+				ControladorVentanaPokemon aux = ControladorVentanaPokemon.getInstance(equipo.getPokemon(i));
+				aux.setDatos();
+				aux.setVentana(true);
+				setVentana(false);
+			}catch (ValorNoValidoExeption ex) {
+			}
+
 		}
+
 		
 	}
 	
@@ -60,6 +86,13 @@ public class ControladorVentanaEditorEquipo implements ActionListener {
 	
 	public void setDatos(){
 		ventana.setDatos(equipo);
+	}
+
+	public void eliminarPokemon(){
+		try {
+			equipo.quitarPokemon(pos);
+		}catch (ValorNoValidoExeption ex){
+		}
 	}
 
 }

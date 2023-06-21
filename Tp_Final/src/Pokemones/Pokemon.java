@@ -110,28 +110,33 @@ public class Pokemon implements IToJson {
           }
     }
 
-    public void setIvs(int iv,IE estadistica) throws ValorNoValidoExeption {
-        if(estadistica.getI() > 5 || estadistica.getI() < 0){
-            throw new ValorNoValidoExeption("el valor de Estadistica tiene que estar entre 0 & 5");
-        }else if(iv > 31 || iv < 0){
-            throw new ValorNoValidoExeption("el valor del iv tiene que estar entre 0 & 31");
-        }else{
-            ivs.set(estadistica.getI(),iv);
-        }
+    public void setIvs(ArrayList<Integer> ivs){
+            this.ivs = ivs;
     }
 
-    public void setEvs(int ev,IE estadistica) throws ValorNoValidoExeption {
-        if(estadistica.getI() > 5 || estadistica.getI() < 0){
-            throw new ValorNoValidoExeption("el valor de Estadistica tiene que estar entre 0 & 5");
-        }else if(ev > 252 || ev < 0){
-            throw new ValorNoValidoExeption("el valor del ev tiene que estar entre 0 & 252");
-        }else if(GestorDeColecciones.sumarDatosColeccion(evs) <= 508){
+    public void setEvs(ArrayList<Integer> evs) throws ValorNoValidoExeption {
+        if(GestorDeColecciones.sumarDatosColeccion(evs) > 508){
             throw new ValorNoValidoExeption("la suma de todos los evs no pueden superar 508, Valor sin el cambio: " + GestorDeColecciones.sumarDatosColeccion(evs));
         }
         else{
-            evs.set(estadistica.getI(),ev);
+            this.evs = evs;
         }
     }
+
+    public Naturaleza getNaturaleza(){
+        return naturaleza;
+    }
+
+    public ArrayList<Integer> getEvs(){
+        return this.evs;
+    }
+
+    public ArrayList<Integer> getIvs(){
+        return this.ivs;
+    }
+
+
+
 
     public void setNaturaleza(Naturaleza naturaleza) {
         this.naturaleza = naturaleza;

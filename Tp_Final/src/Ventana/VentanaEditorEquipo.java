@@ -111,7 +111,6 @@ public class VentanaEditorEquipo extends JFrame {
 		lblPkemon1.setBounds(10, 103, 89, 87);
 		contentPane.add(lblPkemon1);
 		lbls.add(lblPkemon1);
-		
 		lblPkemon2 = new JLabel("New label");
 		lblPkemon2.setBounds(132, 103, 89, 87);
 		contentPane.add(lblPkemon2);
@@ -182,10 +181,15 @@ public class VentanaEditorEquipo extends JFrame {
 		textField.setText(equipo.getNombre());
 		rdbtnHabilitado.setSelected(equipo.isEstado());
 		int i = 0;
+		for(;i<6;i++) {
+			btns.get(i).setVisible(true);
+			lbls.get(i).setVisible(true);
+		}
+		i = 0;
 		try {
 			while(true) {
 				Pokemon p = equipo.getPokemon(i);
-				btns.get(i).setText(p.getNombreParticular());;
+				btns.get(i).setText("Pokemon " + i);
 				Image imagen = null;
 				URL url;
 				try {
@@ -203,8 +207,10 @@ public class VentanaEditorEquipo extends JFrame {
 				i++;
 			}
 		} catch (ValorNoValidoExeption e) {
-			btns.get(i).setText("Agregar");
-			lbls.get(i).setVisible(false);
+			if(i<6) {
+				btns.get(i).setText("Agregar");
+				lbls.get(i).setVisible(false);
+			}
 			for(i++;i<6;i++) {
 				btns.get(i).setVisible(false);
 				lbls.get(i).setVisible(false);

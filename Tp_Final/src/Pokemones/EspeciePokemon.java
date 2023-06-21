@@ -260,7 +260,7 @@ public class EspeciePokemon implements ICargable {
                 "Cadena:" + GestorDeColecciones.CollecionAString(cadenaEvolutiva);
     }
 
-    Habilidad buscarHabilidad(String habilidad) throws HabilidadNoPermitidaExeption{
+    public Habilidad buscarHabilidad(String habilidad) throws HabilidadNoPermitidaExeption{
         int i = 0;
         Habilidad aux;
         while(i < habilidades.size()){
@@ -268,8 +268,13 @@ public class EspeciePokemon implements ICargable {
             if(aux.getNombre().equals(habilidad)){
                 return aux;
             }
+            i++;
         }
         throw new HabilidadNoPermitidaExeption(especie,habilidad);
+    }
+
+    public ArrayList<Habilidad> getHabilidades(){
+        return habilidades;
     }
 
     Movimiento buscarMovimiento(String movimiento) throws MovimientoNoPermitidoExeption{
