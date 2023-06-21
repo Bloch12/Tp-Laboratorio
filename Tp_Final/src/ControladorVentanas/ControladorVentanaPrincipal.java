@@ -36,7 +36,9 @@ public class ControladorVentanaPrincipal implements ActionListener {
 			setVentana(false);
 			
 		}if(comando.equalsIgnoreCase("Mochila")) {
-			
+			ControladorVentanaMochila aux = ControladorVentanaMochila.getInstance();
+			aux.setVentana(true);
+			setVentana(false);
 		}
 	}
 	

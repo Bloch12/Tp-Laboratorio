@@ -6,6 +6,7 @@ import Enums.IE;
 import Enums.Naturaleza;
 import Exepciones.*;
 import Interfaces.IToJson;
+import Objetos.ObjetoEvolutivo;
 import Poderes.Movimiento;
 import Pokemones.Pokemon;
 import org.json.JSONArray;
@@ -13,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Equipo implements IToJson {
     private String nombre;
@@ -74,6 +76,14 @@ public class Equipo implements IToJson {
             throw new ValorNoValidoExeption("posicion invalida");
     }
 
+    public ArrayList<Integer> listarPokemones(){
+        ArrayList<Integer> arr = new ArrayList<>();
+        for(int i = 0; i<pokemones.size();i++){
+            arr.add(i);
+        }
+        return arr;
+    }
+
 
     @Override
     public String toString() {
@@ -120,7 +130,19 @@ public class Equipo implements IToJson {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+       if(o != null && o instanceof Equipo){
+           return getNombre().equals(((Equipo)o).getNombre());
+       }else{
+           return false;
+       }
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, pokemones, estado);
+    }
 }
 
 

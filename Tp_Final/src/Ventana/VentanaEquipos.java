@@ -1,5 +1,8 @@
 package Ventana;
 
+import Almacenamiento.Equipo;
+import ClasesEstaticas.GestorDeEquipo;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -108,6 +111,8 @@ public class VentanaEquipos extends JFrame {
 	public JComboBox getSelectorDeEquipo(){
 		return selectorDeEquipo;
 	}
+
+
 
 	
 	

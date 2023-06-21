@@ -13,7 +13,7 @@ public class ObjetoEvolutivo extends Objeto{
 
     @Override
     public String usar(Equipo equipo, int pokemon) {
-        return null;
+        return "No se puede usar en este momento";
     }
 
 }

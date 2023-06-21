@@ -36,7 +36,7 @@ public class GestorDeArchivosObjetos {
 
     public static <T extends Serializable> ArrayList<T> leer(String nombreArchvo)
     {
-        ArrayList<T>objetos = new ArrayList<>();
+        ArrayList<T> objetos = new ArrayList<>();
 
         FileInputStream fileInputStream = null;
         ObjectInputStream objectInputStream = null;

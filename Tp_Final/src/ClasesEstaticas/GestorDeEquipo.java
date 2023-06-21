@@ -49,6 +49,7 @@ public class GestorDeEquipo{
         else
             throw new ValorNoValidoExeption("Posicion no valida");
     }
+
     public static Equipo getEquipo(String nombre) throws ValorNoValidoExeption{
 
             Equipo[] a = new Equipo[listaDeEquipos.size()];
